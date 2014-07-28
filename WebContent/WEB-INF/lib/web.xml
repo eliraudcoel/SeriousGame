@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>prj_web_010_cours</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- Description des servlets -->
+  <servlet>
+    <description></description>
+    <display-name>Application</display-name>
+    <servlet-name>Application</servlet-name>
+    <servlet-class>Controlleurs.Application</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Application</servlet-name>
+    <url-pattern>/Application</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <description></description>
+    <display-name>Connection</display-name>
+    <servlet-name>Connection</servlet-name>
+    <servlet-class>Controlleurs.Connection</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Connection</servlet-name>
+    <url-pattern>/Connection</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Inscription</display-name>
+    <servlet-name>Inscription</servlet-name>
+    <servlet-class>Controlleurs.Inscription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Inscription</servlet-name>
+    <url-pattern>/Inscription</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <description></description>
+    <display-name>Partie</display-name>
+    <servlet-name>Partie</servlet-name>
+    <servlet-class>Controlleurs.Partie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Partie</servlet-name>
+    <url-pattern>/Partie</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
