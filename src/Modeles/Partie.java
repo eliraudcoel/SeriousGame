@@ -136,7 +136,6 @@ public class Partie extends Modele {
 	}
 	
 	public void add_user(Utilisateur user) throws SQLException {
-		System.out.println("id_partie : "+ this.getId_partie()+" user_id : "+ user.getId());
 		update("Insert into jouer values('"+this.getId_partie()+"','"+user.getId()+"')");
 	}
 

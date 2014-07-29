@@ -23,7 +23,7 @@
 				<tr>
 					<th>Nom de la partie</th>
 					<th>Date de début</th>
-					<th>Nombre de tour</th>
+					<th>Avancement</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,7 +34,13 @@
 					<tr>
 					   <td><a href="<%= lien %>"><%= partie.getNom_partie() %></a></td>
 					   <td><%= partie.getDate_debut() %></td>
-					   <td><%= partie.getDuree() %></td>
+					   <td>
+					   	<div class="progress">
+						  <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="<%= partie.getDuree() %>" style="width: 80%;">
+						    3/<%= partie.getDuree() %>
+						  </div>
+						</div>
+					   </td>
 					</tr>
 				<%}%>
 			</tbody>
@@ -51,28 +57,71 @@
 	<div class="row">
 		<h2 class="col-xs-12"> Rejoindre une partie :</h2>
 	</div>
+	<div class="row">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Nom de la partie</th>
+					<th>Date de début</th>
+					<th>Avancement</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					Utilisateur user = (Utilisateur) session.getAttribute("user");
+					ArrayList<Partie> not_started_parties = (ArrayList<Partie>) request.getAttribute("not_started_games");
+					
+					for(Partie partie : not_started_parties) {
+				%>
+					<tr>
+					   <td><a href="<%= lien %>"><%= partie.getNom_partie() %></a></td>
+					   <td><%= partie.getDate_debut() %></td>
+					   <td>
+					   	<div class="progress">
+						  <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="<%= partie.getDuree() %>" style="width: 60%;">
+						    2/<%= partie.getDuree() %>
+						  </div>
+						</div>
+					   </td>
+					   <td>
+					   	<form action="Parties" method="post" role="form" class="form-horizontal col-xs-12">
+							<input type="hidden" name="user_id" value="<%= user.getId() %>" />
+							<input type="hidden" name="partie_id" value="<%= partie.getId_partie()%>" />
+							<button type="submit" class="btn btn-success col-xs-12">
+					   			<span class="glyphicon glyphicon-play"></span>
+					   		</button>
+					   	</form>
+					   </td>
+					</tr>
+				<%}%>
+			</tbody>
+		</table>
+	</div>
 	
+	<!--
 	<div class="row">
 		<form action="Parties" method="post" role="form" class="form-horizontal col-xs-12">
-			<%
+			<#
 				Utilisateur user = (Utilisateur) session.getAttribute("user");
 			%>
-		<input type="hidden" name="user_id" value="<%= user.getId() %>" />
+		<input type="hidden" name="user_id" value="<# user.getId() %>" />
 		<div class="form-group">
 				<select class="form-control" name="partie_id">
-					<%
+					<#
 						ArrayList<Partie> not_started_parties = (ArrayList<Partie>) request.getAttribute("not_started_games");
 						
 						for(Partie partie : not_started_parties) {
 							String en_cours = "";
 					%>
-					  <option value="<%= partie.getId_partie()%>"><%= partie.getNom_partie() %></option>
-					<%}%>
+					  <option value="<# partie.getId_partie()%>"><# partie.getNom_partie() %></option>
+					<#}%>
 				</select>
 			</div>
 			<div class="form-group">
 			 <button type="submit" class="btn btn-success col-xs-12">Rejoindre!</button>
 			</div>
 	</div>
+	-->
 <!-- Insertion Footer -->
 <%@ include file="../footer.jsp"  %>

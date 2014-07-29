@@ -16,6 +16,8 @@
 			</div>
 			<div class="form-group">
 				<input placeholder="Login" name="login" class="form-control"></input>
+			</div>
+			<div class="form-group">
 				<input type="password" placeholder="Mot de passe" name="mdp" class="form-control"></input>
 			</div>
 			<div class="form-group">
