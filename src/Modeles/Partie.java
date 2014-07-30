@@ -107,7 +107,7 @@ public class Partie extends Modele {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date date_debut = format.parse(this.getDate_debut());
 		
-		if(date_debut.compareTo(today) < 0)
+		if(date_debut.compareTo(today) < 0 || date_debut.compareTo(today) == 0)
 			en_cours = true;
 		
 		return en_cours;

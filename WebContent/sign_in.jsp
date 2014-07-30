@@ -24,6 +24,8 @@
 		</form>
 	</div>
 	
+	<a href="Application?action=index"> Retour </a>
+	
 	
 <!-- Insertion Footer -->
 <%@ include file="footer.jsp"  %>

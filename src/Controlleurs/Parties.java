@@ -63,6 +63,23 @@ public class Parties extends HttpServlet {
 				e.getMessage();
 			}
 		}
+		
+		if(request.getParameter("action").equals("historic")){
+			List<Partie> finished_parties;
+			try {
+				finished_parties = Partie.finished_partie();
+			
+				request.setAttribute("finished_parties", finished_parties);
+				if( request.getAttribute("message") != null)
+					request.setAttribute("message", request.getAttribute("message"));
+				
+				request.getRequestDispatcher("WEB-INF/parties/historic.jsp").forward(request, response);
+			} catch (SQLException e) {
+				e.getMessage();
+			} catch (ParseException e) {
+				e.getMessage();
+			}
+		}
 	}
 
 	/**

@@ -42,6 +42,25 @@ public class Utilisateur extends Modele {
 		return user;
 	}
 	
+	public static Utilisateur find_by_email(String email) throws SQLException {
+		Utilisateur user = null;
+		
+		// Requête en BDD
+		ResultSet resultat = query( "SELECT id_utilisateur, login, mdp, email, admin FROM utilisateur WHERE email ='"+ email +"'");
+		
+		// Tant qu'il y a des resultats on créé un object Pays
+		if( resultat.next() ) {
+			user = new Utilisateur(
+					resultat.getString( "id_utilisateur" ), 
+					resultat.getString( "login" ), 
+					resultat.getString( "mdp" ), 
+					resultat.getString( "email" ), 
+					resultat.getString( "admin" )
+			);
+		}
+		return user;
+	}
+	
 	public static Utilisateur find(String id_utilisateur) throws SQLException {
 		Utilisateur user = null;
 		
@@ -91,7 +110,15 @@ public class Utilisateur extends Modele {
 	}
 	
 	public static void addUser(Utilisateur user) throws SQLException {
-		update("Insert into utilisateur values('"+user.getId()+"','"+user.getLogin()+"','"+user.getMdp()+"','"+user.getEmail()+"','"+user.getAdmin()+"')");
+		update("INSERT into utilisateur VALUES('"+user.getId()+"','"+user.getLogin()+"','"+user.getMdp()+"','"+user.getEmail()+"','"+user.getAdmin()+"')");
+	}
+	
+	public static void updateUser(Utilisateur user) throws SQLException {
+		update("UPDATE utilisateur SET login = '"+user.getLogin()+"', mdp = '"+user.getMdp()+"', email = '"+user.getEmail()+"' WHERE id_utilisateur = '"+ user.getId() +"'");
+	}
+	
+	public void update_by_params(String params_type, String params) throws SQLException {
+		update("UPDATE utilisateur SET "+ params_type +" = '"+ params +"' WHERE id_utilisateur = '"+ this.getId() +"'");
 	}
 
 	public String getId() {

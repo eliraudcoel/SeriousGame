@@ -24,7 +24,17 @@
 	            </li>
 	            <li>
 	            	<a href="Parties?action=index" class="col-xs-12">
-	            		<span class="glyphicon glyphicon-tower"></span> Liste de Partie
+	            		<span class="glyphicon glyphicon-list"></span> Liste de Partie
+	            	</a>
+	            </li>
+	            <li>
+	            	<a href="Parties?action=historic" class="col-xs-12">
+	            		<span class="glyphicon glyphicon-backward"></span> Mon historique
+	            	</a>
+	            </li>
+	            <li>
+	            	<a href="Utilisateurs?action=edit" class="col-xs-12">
+	            		<span class="glyphicon glyphicon-wrench"></span> Mes paramètres
 	            	</a>
 	            </li>
 	            <li>

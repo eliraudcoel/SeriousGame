@@ -44,15 +44,26 @@
     <url-pattern>/Inscription</url-pattern>
   </servlet-mapping>
   
-   <servlet>
+  <servlet>
     <description></description>
-    <display-name>Partie</display-name>
-    <servlet-name>Partie</servlet-name>
-    <servlet-class>Controlleurs.Partie</servlet-class>
+    <display-name>Parties</display-name>
+    <servlet-name>Parties</servlet-name>
+    <servlet-class>Controlleurs.Parties</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Partie</servlet-name>
-    <url-pattern>/Partie</url-pattern>
+    <servlet-name>Parties</servlet-name>
+    <url-pattern>/Parties</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Utilisateurs</display-name>
+    <servlet-name>Utilisateurs</servlet-name>
+    <servlet-class>Controlleurs.Utilisateurs</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Utilisateurs</servlet-name>
+    <url-pattern>/Utilisateurs</url-pattern>
   </servlet-mapping>
   
 </web-app>
