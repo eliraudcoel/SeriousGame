@@ -4,10 +4,10 @@
 <%@ include file="../header.jsp"  %>
 	
 	<% if(request.getAttribute("message_email") != null || request.getAttribute("message_mdp") != null) { %>
-	<div class="row alert alert-danger alert-dismissible" role="alert">
-		<p class="col-xs-12"><%= request.getAttribute("message_email") %></p>
-		<p class="col-xs-12"><%= request.getAttribute("message_mdp") %></p>
-	</div>
+		<div class="row alert alert-danger alert-dismissible" role="alert">
+			<p class="col-xs-12"><%= request.getAttribute("message_email") %></p>
+			<p class="col-xs-12"><%= request.getAttribute("message_mdp") %></p>
+		</div>
 	<% } %>
 	
 	<div class="row">
@@ -18,14 +18,14 @@
 	
 	<div class="row">
 		<form action="Utilisateurs" method="post" role="form" class="form-horizontal col-xs-12">
-			<input type="hidden" name="user_id" value="<%= user.getId() %>" />
+			<input type="hidden" name="user_id" value="${user.getId()}" />
 			<div class="form-group">
 				<label class="col-xs-12">Email :</label>
-				<input placeholder="Email" name="email" class="form-control" value="<%= user.getEmail() %>" />
+				<input placeholder="Email" name="email" class="form-control" value="${user.getEmail()}" />
 			</div>
 			<div class="form-group">
 				<label class="col-xs-12">Login :</label>
-				<input placeholder="Login" name="login" class="form-control" value="<%= user.getLogin() %>" />
+				<input placeholder="Login" name="login" class="form-control" value="${user.getLogin()}" />
 			</div>
 			<div class="form-group">
 				<label class="col-xs-12">Changement de mot de passe :</label>

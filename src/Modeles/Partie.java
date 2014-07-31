@@ -92,7 +92,7 @@ public class Partie extends Modele {
 		List<Partie> finished_parties = new ArrayList<Partie>();
 		
 		for (Partie partie : results) {
-			if(partie.is_processing() == false && partie.getDate_fin() != null) {
+			if(partie.getDate_fin() != null) {
 				finished_parties.add(partie);
 			}
 		}

@@ -34,8 +34,8 @@
 					   <td><%= partie.getDate_debut() %></td>
 					   <td>
 					   	<div class="progress">
-						  <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="<%= partie.getDuree() %>" style="width: 80%;">
-						    3/<%= partie.getDuree() %>
+						  <div class="progress-bar" role="progressbar" aria-valuenow="<%= partie.getDuree() %>" aria-valuemin="0" aria-valuemax="<%= partie.getDuree() %>" style="width: 100%;">
+						    <%= partie.getDuree() %>/<%= partie.getDuree() %>
 						  </div>
 						</div>
 					   </td>

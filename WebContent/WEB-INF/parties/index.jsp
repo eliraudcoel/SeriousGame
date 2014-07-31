@@ -88,9 +88,7 @@
 					   	<form action="Parties" method="post" role="form" class="form-horizontal col-xs-12">
 							<input type="hidden" name="user_id" value="<%= user.getId() %>" />
 							<input type="hidden" name="partie_id" value="<%= partie.getId_partie()%>" />
-							<button type="submit" class="btn btn-success col-xs-12">
-					   			<span class="glyphicon glyphicon-play"></span>
-					   		</button>
+							<button type="submit" class="btn col-xs-12"> Jouer ! </button>
 					   	</form>
 					   </td>
 					</tr>

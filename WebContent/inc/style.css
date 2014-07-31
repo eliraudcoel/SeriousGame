@@ -4,3 +4,7 @@ body {
 	background-color: #DDD;
 	width: 100%;
 }
+
+nav > li > a {
+	text-align: center;
+}
