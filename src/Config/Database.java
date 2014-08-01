@@ -9,7 +9,7 @@ public class Database {
 	
 	// On met en static les données pour se connecter à la BDD - ils ne sont pas censés changer et etre changer
 	public static String driver = "com.mysql.jdbc.Driver";
-	public static String url = "jdbc:mysql://127.0.0.1/serious_game";
+	public static String url = "jdbc:mysql://127.0.0.1/playbusiness";
 	public static String utilisateur = "root";
 	public static String motDePasse = "";
 	
