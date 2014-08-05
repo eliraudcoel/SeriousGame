@@ -5,8 +5,14 @@
 	
 	<% if(request.getAttribute("message_email") != null || request.getAttribute("message_mdp") != null) { %>
 		<div class="row alert alert-danger alert-dismissible" role="alert">
-			<p class="col-xs-12"><%= request.getAttribute("message_email") %></p>
-			<p class="col-xs-12"><%= request.getAttribute("message_mdp") %></p>
+			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			<% if(request.getAttribute("message_email") != null) { %>
+			<strong>Attention! </strong><%= request.getAttribute("message_email") %>
+			<% }
+			   if(request.getAttribute("message_mdp") != null) {
+			%>
+			<strong>Attention! </strong><%= request.getAttribute("message_mdp") %>
+			<% } %>
 		</div>
 	<% } %>
 	
