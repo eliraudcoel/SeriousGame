@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Modeles.Entreprise;
 import Modeles.Utilisateur;
 
 /**
@@ -40,12 +41,18 @@ public class Inscription extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("login") != " " && request.getParameter("mdp") != " " && request.getParameter("email") != " ") {
-			String identifiant;
+		if(request.getParameter("login") != " " && request.getParameter("mdp") != " " && request.getParameter("email") != " " && request.getParameter("entreprise") != " ") {
+			String id_utilisateur;
+			String id_entreprise;
+			Entreprise entreprise = null;
 			try {
-				identifiant = Utilisateur.lastId();
+				id_utilisateur = Utilisateur.lastId();
+				id_entreprise = Entreprise.lastId();
+				entreprise = new Entreprise(id_entreprise, id_utilisateur, request.getParameter("entreprise"));
+				Entreprise.addEntreprise(entreprise);
 				Utilisateur user = new Utilisateur(
-						identifiant, 
+						id_utilisateur,
+						id_entreprise,
 						request.getParameter("login"), 
 						request.getParameter("mdp"), 
 						request.getParameter("email"), 

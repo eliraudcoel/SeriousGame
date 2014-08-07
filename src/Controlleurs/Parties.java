@@ -56,6 +56,7 @@ public class Parties extends HttpServlet {
 		if(request.getParameter("action").equals("show")){
 			try {
 				Partie partie = Partie.find(request.getParameter("nb"));
+				// Mettre pour les produits
 				request.setAttribute("partie", partie);
 				
 				request.getRequestDispatcher("WEB-INF/parties/show.jsp").forward(request, response);

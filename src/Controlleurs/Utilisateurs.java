@@ -63,7 +63,6 @@ public class Utilisateurs extends HttpServlet {
 		
 		session.removeAttribute("user");
 		session.setAttribute("user", user);
-		
 	}
 
 	/**

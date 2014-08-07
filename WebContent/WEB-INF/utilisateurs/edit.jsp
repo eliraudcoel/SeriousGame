@@ -1,4 +1,6 @@
+<%@page import="Modeles.Entreprise"%>
 <%@ page import="Modeles.Utilisateur"%>
+<%@ page import="Modeles.Entreprise"%>
 
 <!-- Insertion Header -->
 <%@ include file="../header.jsp"  %>
@@ -25,6 +27,11 @@
 	<div class="row">
 		<form action="Utilisateurs" method="post" role="form" class="form-horizontal col-xs-12">
 			<input type="hidden" name="user_id" value="${user.getId()}" />
+			<div class="form-group">
+				<% Entreprise entreprise = user.getEntreprise();%>
+				<label class="col-xs-12">Entreprise :</label>
+				<input placeholder="Entreprise" name="entreprise" class="form-control" value="<%= entreprise.getNom_entreprise() %>" />
+			</div>
 			<div class="form-group">
 				<label class="col-xs-12">Email :</label>
 				<input placeholder="Email" name="email" class="form-control" value="${user.getEmail()}" />

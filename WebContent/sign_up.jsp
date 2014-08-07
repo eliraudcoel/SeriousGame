@@ -1,6 +1,9 @@
 <h2 class="col-xs-12"> Formulaire d'inscription </h2>
 <form action="Inscription" method="post" role="form" class="form-horizontal col-xs-12">
 	<div class="form-group">
+		<input placeholder="Entreprise" name="entreprise" class="form-control"></input>
+	</div>
+	<div class="form-group">
 		<input placeholder="Email" name="email" class="form-control"></input>
 	</div>
 	<div class="form-group">

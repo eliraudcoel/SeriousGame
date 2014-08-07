@@ -1,43 +1,83 @@
 package Modeles;
 
-public class Produit {
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-	private int id_produit;
+public class Produit extends Modele {
+
+	private String id_produit;
+	private String id_entreprise;
 	private String nom_produit;
 	private String image_produit;
-	private int stock;
+	private String stock;
 	
-	public Produit(int id_produit, String nom_produit, String image_produit,
-			int stock) {
+	//private Entreprise entreprise;
+	
+	public Produit(String id_produit, String id_entreprise, String nom_produit,
+			String image_produit, String stock) {
 		super();
 		this.id_produit = id_produit;
+		this.id_entreprise = id_entreprise;
 		this.nom_produit = nom_produit;
 		this.image_produit = image_produit;
 		this.stock = stock;
 	}
-	
-	public int getId_produit() {
+
+	public static Produit find(String id_produit) throws SQLException {
+		Produit produit = null;
+		ResultSet resultat = query( "SELECT id_produit, id_entreprise, " +
+				"nom_produit, image_produit, stock" +
+				"FROM produit WHERE id_produit ='"+ id_produit +"'");
+		
+		if( resultat.next() ) {
+			produit = new Produit(
+					resultat.getString( "id_produit" ),
+					resultat.getString( "id_entreprise" ), 
+					resultat.getString( "nom_produit" ), 
+					resultat.getString( "image_produit" ), 
+					resultat.getString( "stock" )
+			);
+		}
+		return produit;
+	}
+
+	public String getId_produit() {
 		return id_produit;
 	}
-	public void setId_produit(int id_produit) {
+
+	public void setId_produit(String id_produit) {
 		this.id_produit = id_produit;
 	}
+
+	public String getId_entreprise() {
+		return id_entreprise;
+	}
+
+	public void setId_entreprise(String id_entreprise) {
+		this.id_entreprise = id_entreprise;
+	}
+
 	public String getNom_produit() {
 		return nom_produit;
 	}
+
 	public void setNom_produit(String nom_produit) {
 		this.nom_produit = nom_produit;
 	}
+
 	public String getImage_produit() {
 		return image_produit;
 	}
+
 	public void setImage_produit(String image_produit) {
 		this.image_produit = image_produit;
 	}
-	public int getStock() {
+
+	public String getStock() {
 		return stock;
 	}
-	public void setStock(int stock) {
+
+	public void setStock(String stock) {
 		this.stock = stock;
-	}	
+	}
 }
