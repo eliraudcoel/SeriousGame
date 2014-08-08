@@ -7,11 +7,6 @@
 		}else {
 			if(session.getAttribute("user") != null) {
 				response.sendRedirect("Application?action=home");
-			} else {
-				%>
-				<!-- Texte de bienvenue -->
-				<h2> Bienvenue !</h2>
-				<%
 			}
 		}
 	%>
@@ -23,10 +18,10 @@
 	<% } %>
 	
 	<div class="row">
-		<div class="sign_in col-xs-6">
+		<div class="sign_in col-xs-12 col-md-5">
 			<%@ include file="sign_in.jsp"  %>
 		</div>
-		<div class="sign_up col-xs-6">
+		<div class="sign_up col-xs-12 col-md-5">
 			<%@ include file="sign_up.jsp"  %>
 		</div>
 	</div>

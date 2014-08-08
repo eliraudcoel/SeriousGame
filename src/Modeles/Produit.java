@@ -2,6 +2,8 @@ package Modeles;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Produit extends Modele {
 
@@ -11,16 +13,17 @@ public class Produit extends Modele {
 	private String image_produit;
 	private String stock;
 	
-	//private Entreprise entreprise;
+	private Entreprise entreprise;
 	
 	public Produit(String id_produit, String id_entreprise, String nom_produit,
-			String image_produit, String stock) {
+			String image_produit, String stock) throws SQLException {
 		super();
 		this.id_produit = id_produit;
 		this.id_entreprise = id_entreprise;
 		this.nom_produit = nom_produit;
 		this.image_produit = image_produit;
 		this.stock = stock;
+		this.entreprise = Entreprise.find(id_entreprise);
 	}
 
 	public static Produit find(String id_produit) throws SQLException {
@@ -39,6 +42,28 @@ public class Produit extends Modele {
 			);
 		}
 		return produit;
+	}
+	
+	public static List<Produit> find_by_entreprise(String id_entreprise) throws SQLException {
+		List<Produit> produits = new ArrayList<Produit>();
+		Produit produit = null;
+		String query = "SELECT id_produit, id_entreprise, " +
+				"nom_produit, image_produit, stock " +
+				"FROM produit WHERE id_entreprise ='"+ id_entreprise +"'";
+		ResultSet resultat = query(query);
+		if( resultat.next() ) {
+			System.out.println(resultat);
+			produit = new Produit(
+					resultat.getString( "id_produit" ),
+					resultat.getString( "id_entreprise" ), 
+					resultat.getString( "nom_produit" ), 
+					resultat.getString( "image_produit" ), 
+					resultat.getString( "stock" )
+			);
+			System.out.println(produit.getNom_produit());
+			produits.add(produit);
+		}
+		return produits;
 	}
 
 	public String getId_produit() {
@@ -79,5 +104,9 @@ public class Produit extends Modele {
 
 	public void setStock(String stock) {
 		this.stock = stock;
+	}
+	
+	public Entreprise getEntreprise() {
+		return entreprise;
 	}
 }

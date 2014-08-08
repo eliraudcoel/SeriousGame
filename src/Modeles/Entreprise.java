@@ -10,7 +10,9 @@ public class Entreprise extends Modele {
 	private String id_entreprise;
 	private String id_utilisateur;
 	private String nom_entreprise;
+	
 	private Utilisateur utilisateur;
+	private List<Produit> produits;
 	
 	public Entreprise(String id_entreprise, String id_utilisateur,
 			String nom_entreprise) throws SQLException {
@@ -19,6 +21,7 @@ public class Entreprise extends Modele {
 		this.id_utilisateur = id_utilisateur;
 		this.nom_entreprise = nom_entreprise;
 		this.utilisateur = Utilisateur.find(id_utilisateur);
+		this.produits = Produit.find_by_entreprise(id_entreprise);
 	}
 	
 	public static Entreprise find(String id_entreprise) throws SQLException {
@@ -42,11 +45,9 @@ public class Entreprise extends Modele {
 	public static Entreprise find_by_user(String id_utilisateur) throws SQLException {
 		Entreprise entreprise = null;
 		
-		// Requête en BDD
 		ResultSet resultat = query( "SELECT id_entreprise, id_utilisateur, nom_entreprise " +
 				"FROM entreprise WHERE id_utilisateur ='"+ id_utilisateur +"'");
 		
-		// Tant qu'il y a des resultats on créé un object Pays
 		if( resultat.next() ) {
 			entreprise = new Entreprise(
 					resultat.getString( "id_entreprise" ), 
@@ -130,5 +131,8 @@ public class Entreprise extends Modele {
 	}
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
+	}
+	public List<Produit> getProduits() {
+		return produits;
 	}
 }

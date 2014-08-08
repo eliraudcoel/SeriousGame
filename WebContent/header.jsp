@@ -17,4 +17,4 @@
 		<title>Jeu d'entreprise</title>
 	</head>
 	<body class="index_layout">
-        <div class="container">
+        <div class="container-fluid">

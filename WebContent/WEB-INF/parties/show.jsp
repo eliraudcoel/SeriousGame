@@ -1,10 +1,17 @@
+<%@page import="Modeles.Produit"%>
+<%@page import="Modeles.Utilisateur"%>
+<%@page import="Modeles.Entreprise"%>
 <%@ page import="Modeles.Partie"%>
+
+<%@ page import="java.util.List"%>
 
 <!-- Insertion Header -->
 <%@ include file="../header.jsp"  %>
 
 	<%
 		Partie partie = (Partie) request.getAttribute("partie");
+		Utilisateur user = (Utilisateur) session.getAttribute("user");
+		Entreprise entreprise = user.getEntreprise();
 	%>
 	<div class="row">
 		<h2 class="col-xs-12">Partie <%= partie.getNom_partie() %></h2>
@@ -59,13 +66,18 @@
 		</table>
 	</div>
 	
+	
 	<div class="row">
+		<%
+			List<Produit> produits = entreprise.getProduits();
+			for(Produit produit : produits) {
+		%>
 		<div class="panel-group" id="accordion">
 		  <div class="panel panel-default">
 		    <div class="panel-heading">
 		      <h4 class="panel-title">
 		        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-		          Produit 1
+		         	<%= produit.getNom_produit() %>
 		        </a>
 		      </h4>
 		    </div>
@@ -76,6 +88,7 @@
 		    </div>
 		  </div>
 	  	</div>
+	  	<% } %>
 	</div>
 	
 <!-- Insertion Footer -->
