@@ -1,4 +1,4 @@
-<!-- Insertion Header -->s
+<!-- Insertion Header -->
 <%@page import="java.lang.ProcessBuilder.Redirect"%>
 <%@ include file="header.jsp"  %>
 	<% 
@@ -26,7 +26,7 @@
 		<div class="sign_in col-xs-6">
 			<%@ include file="sign_in.jsp"  %>
 		</div>
-		<div class="sign_in col-xs-6">
+		<div class="sign_up col-xs-6">
 			<%@ include file="sign_up.jsp"  %>
 		</div>
 	</div>
