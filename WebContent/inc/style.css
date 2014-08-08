@@ -2,7 +2,7 @@
 
 body.index_layout {
 	background-color: #3A7FA5;
-	background-image: url("../images/serious-game.jpg");
+	/*background-image: url("../images/serious-game.jpg");*/
 	background-position: center center;
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
@@ -11,6 +11,7 @@ body.index_layout {
 
 .sign_in > h1, h2, h3, h4, .sign_up > h1, h2, h3, h4 {
 	color: #FFF !important;
+	margin: 0 !important;
 }
 
 .sign_in, .sign_up {
@@ -34,7 +35,7 @@ body.index_layout {
     color: rgba(3, 76, 145, 0.43);
     background-color: rgba(255, 255, 255, 0.17);
 }
-.input-group > input {
+.input-group input {
     background-color: rgba(255, 255, 255, 0.17);
     border: 0px solid transparent;
     border-radius: 0px;
@@ -42,13 +43,18 @@ body.index_layout {
     margin-left: 0.2em;
 }
 .sign_in_button {
-    border-radius: 0;
+    border-radius: 0 !important;
     padding: 0.5em 1em;
+    text-align: center;
 }
 
 .form-control:focus {
-   border: 0px;
-   box-shadow: none;
+   border: 0px !important;
+   box-shadow: none !important;
 }
 
-.sign_in > .form-control::-webkit-input-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
+::-webkit-input-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
+::-webkit-input-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
+:-moz-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
+::-moz-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
+:-ms-input-placeholder { color: rgba(255, 255, 255, 0.5) !important; }
