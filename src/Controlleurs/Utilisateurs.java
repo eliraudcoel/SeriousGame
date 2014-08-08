@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Modeles.Entreprise;
 import Modeles.Utilisateur;
 
 /**
@@ -57,6 +58,16 @@ public class Utilisateurs extends HttpServlet {
 		return ok;
 	}
 	
+	protected boolean verifEntreprise(String nom_entreprise) throws SQLException {
+		boolean ok = false;
+		Entreprise entreprise = Entreprise.find_by_name(nom_entreprise);
+		
+		if (entreprise == null)
+			ok = true;
+		
+		return ok;
+	}
+	
 	protected void updateUserInSession(HttpServletRequest request) throws SQLException {
 		Utilisateur user = Utilisateur.find(request.getParameter("user_id"));
 		HttpSession session = request.getSession();
@@ -69,18 +80,22 @@ public class Utilisateurs extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String message_mdp = "", message_email = "";
+		String message_mdp = "", message_email = "", message_ent = "";
 		boolean mdp_ok = false;
 		boolean email_ok = false;
+		boolean ent_ok = false;
 		Utilisateur user = null;
+		Entreprise entreprise = null;
 		
 		String email = request.getParameter("email");
 		String login = request.getParameter("login");
 		String mdp = request.getParameter("mdp");
 		String mdp_confirmation = request.getParameter("mdp_confirmation");
+		String nom_entreprise = request.getParameter("entreprise");
 		
 		try {
 			user = Utilisateur.find(request.getParameter("user_id"));
+			entreprise = user.getEntreprise();
 			
 			if(mdp != "" && mdp_confirmation != "") {
 				mdp_ok = verifMdp(mdp, mdp_confirmation);
@@ -104,11 +119,20 @@ public class Utilisateurs extends HttpServlet {
 			if(login != "") {
 				user.update_by_params("login", login);
 			}
+			if(nom_entreprise != "") {
+				ent_ok = verifEntreprise(nom_entreprise);
+				if(ent_ok)
+					entreprise.update_by_params("nom_entreprise", nom_entreprise);
+				else
+					message_ent = "Le nom d'entreprise que vous avez rentrer est déjà utilisé";
+			}
 			
 			if (message_email != "")
 				request.setAttribute("message_email", message_email);
 			if (message_mdp != "")
 				request.setAttribute("message_mdp", message_mdp);
+			if (message_ent != "")
+				request.setAttribute("message_ent", message_ent);
 			
 			updateUserInSession(request);
 			

@@ -33,7 +33,7 @@ public class Inscription extends HttpServlet {
 		if(request.getAttribute("message") == null) {
 			request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
 		}else {
-			request.getRequestDispatcher("sign_up.jsp").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 

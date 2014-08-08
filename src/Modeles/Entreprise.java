@@ -57,6 +57,24 @@ public class Entreprise extends Modele {
 		return entreprise;
 	}
 	
+	public static Entreprise find_by_name(String nom_utilisateur) throws SQLException {
+		Entreprise entreprise = null;
+		
+		// Requête en BDD
+		ResultSet resultat = query( "SELECT id_entreprise, id_utilisateur, nom_entreprise " +
+				"FROM entreprise WHERE nom_entreprise ='"+ nom_utilisateur +"'");
+		
+		// Tant qu'il y a des resultats on créé un object Pays
+		if( resultat.next() ) {
+			entreprise = new Entreprise(
+					resultat.getString( "id_entreprise" ), 
+					resultat.getString( "id_utilisateur" ), 
+					resultat.getString( "nom_entreprise" )
+			);
+		}
+		return entreprise;
+	}
+	
 	public static List<Entreprise> all() throws SQLException {
 		List<Entreprise> results = new ArrayList<Entreprise>();
 		
@@ -79,12 +97,17 @@ public class Entreprise extends Modele {
 		for (Entreprise entreprise : entreprises) {
 			id = entreprise.getId_entreprise();
 		}
-		int ident = Integer.parseInt(id +1);
-		return Integer.toString(ident);
+		int ident = Integer.parseInt(id);
+		ident = ident + 1;
+		return ""+ident;
 	}
 	
 	public static void addEntreprise(Entreprise entreprise) throws SQLException {
 		update("INSERT into entreprise VALUES('"+entreprise.getId_entreprise()+"','"+entreprise.getId_utilisateur()+"','"+entreprise.getNom_entreprise()+"')");
+	}
+	
+	public void update_by_params(String params_type, String params) throws SQLException {
+		update("UPDATE entreprise SET "+ params_type +" = '"+ params +"' WHERE id_entreprise = '"+ this.getId_entreprise() +"'");
 	}
 	
 	public String getId_entreprise() {

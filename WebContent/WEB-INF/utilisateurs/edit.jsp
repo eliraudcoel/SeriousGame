@@ -14,6 +14,10 @@
 			   if(request.getAttribute("message_mdp") != null) {
 			%>
 			<strong>Attention! </strong><%= request.getAttribute("message_mdp") %>
+			<% }
+			   if(request.getAttribute("message_ent") != null) {
+			%>
+			<strong>Attention! </strong><%= request.getAttribute("message_ent") %>
 			<% } %>
 		</div>
 	<% } %>

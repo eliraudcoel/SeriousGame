@@ -33,7 +33,7 @@ public class Connection extends HttpServlet {
 		if(request.getAttribute("message") == null) {
 			request.getRequestDispatcher("WEB-INF/home.jsp").forward(request, response);
 		}else {
-			request.getRequestDispatcher("sign_in.jsp").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 
@@ -41,7 +41,6 @@ public class Connection extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String message = "";
 		if(request.getParameter("login") != " " && request.getParameter("mdp") != " ") {
 			try {
 				Utilisateur user = Utilisateur.find_by_identification(request.getParameter("login"),request.getParameter("mdp"));

@@ -113,8 +113,9 @@ public class Utilisateur extends Modele {
 		for (Utilisateur user : users) {
 			id = user.getId();
 		}
-		int ident = Integer.parseInt(id +1);
-		return Integer.toString(ident);
+		int ident = Integer.parseInt(id);
+		ident = ident + 1;
+		return ""+ident;
 	}
 	
 	public static void addUser(Utilisateur user) throws SQLException {
