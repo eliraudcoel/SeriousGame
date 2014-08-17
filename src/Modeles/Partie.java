@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.mysql.jdbc.Util;
-
 public class Partie extends Modele {
 	
 	private String id_partie;

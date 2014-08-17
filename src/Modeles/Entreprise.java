@@ -11,7 +11,7 @@ public class Entreprise extends Modele {
 	private String id_utilisateur;
 	private String nom_entreprise;
 	
-	private Utilisateur utilisateur;
+	//private Utilisateur utilisateur;
 	private List<Produit> produits;
 	
 	public Entreprise(String id_entreprise, String id_utilisateur,
@@ -20,18 +20,18 @@ public class Entreprise extends Modele {
 		this.id_entreprise = id_entreprise;
 		this.id_utilisateur = id_utilisateur;
 		this.nom_entreprise = nom_entreprise;
-		this.utilisateur = Utilisateur.find(id_utilisateur);
+		// Enlever a cause de "too many connections"
+		//this.utilisateur = Utilisateur.find(id_utilisateur);
 		this.produits = Produit.find_by_entreprise(id_entreprise);
 	}
 	
 	public static Entreprise find(String id_entreprise) throws SQLException {
 		Entreprise entreprise = null;
 		
-		// Requête en BDD
+
 		ResultSet resultat = query( "SELECT id_entreprise, id_utilisateur, nom_entreprise " +
 				"FROM entreprise WHERE id_entreprise ='"+ id_entreprise +"'");
 		
-		// Tant qu'il y a des resultats on créé un object Pays
 		if( resultat.next() ) {
 			entreprise = new Entreprise(
 					resultat.getString( "id_entreprise" ), 
@@ -61,11 +61,9 @@ public class Entreprise extends Modele {
 	public static Entreprise find_by_name(String nom_utilisateur) throws SQLException {
 		Entreprise entreprise = null;
 		
-		// Requête en BDD
 		ResultSet resultat = query( "SELECT id_entreprise, id_utilisateur, nom_entreprise " +
 				"FROM entreprise WHERE nom_entreprise ='"+ nom_utilisateur +"'");
 		
-		// Tant qu'il y a des resultats on créé un object Pays
 		if( resultat.next() ) {
 			entreprise = new Entreprise(
 					resultat.getString( "id_entreprise" ), 
@@ -129,9 +127,9 @@ public class Entreprise extends Modele {
 	public void setNom_entreprise(String nom_entreprise) {
 		this.nom_entreprise = nom_entreprise;
 	}
-	public Utilisateur getUtilisateur() {
-		return utilisateur;
-	}
+//	public Utilisateur getUtilisateur() {
+//		return utilisateur;
+//	}
 	public List<Produit> getProduits() {
 		return produits;
 	}

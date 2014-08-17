@@ -13,8 +13,6 @@ public class Produit extends Modele {
 	private String image_produit;
 	private String stock;
 	
-	private Entreprise entreprise;
-	
 	public Produit(String id_produit, String id_entreprise, String nom_produit,
 			String image_produit, String stock) throws SQLException {
 		super();
@@ -23,7 +21,6 @@ public class Produit extends Modele {
 		this.nom_produit = nom_produit;
 		this.image_produit = image_produit;
 		this.stock = stock;
-		this.entreprise = Entreprise.find(id_entreprise);
 	}
 
 	public static Produit find(String id_produit) throws SQLException {
@@ -52,7 +49,6 @@ public class Produit extends Modele {
 				"FROM produit WHERE id_entreprise ='"+ id_entreprise +"'";
 		ResultSet resultat = query(query);
 		if( resultat.next() ) {
-			System.out.println(resultat);
 			produit = new Produit(
 					resultat.getString( "id_produit" ),
 					resultat.getString( "id_entreprise" ), 
@@ -60,7 +56,6 @@ public class Produit extends Modele {
 					resultat.getString( "image_produit" ), 
 					resultat.getString( "stock" )
 			);
-			System.out.println(produit.getNom_produit());
 			produits.add(produit);
 		}
 		return produits;
@@ -105,8 +100,5 @@ public class Produit extends Modele {
 	public void setStock(String stock) {
 		this.stock = stock;
 	}
-	
-	public Entreprise getEntreprise() {
-		return entreprise;
-	}
+
 }

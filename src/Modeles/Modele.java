@@ -23,14 +23,12 @@ public class Modele {
 	// méthode query() qui permet d'effectuer des requêtes en base
 	public static ResultSet query(String sqlQuery) throws SQLException {
 		Statement statement = (Statement) getConnection().createStatement();
-		
 		ResultSet resultat = statement.executeQuery(sqlQuery);
 		return resultat;
 	}
 	
 	public static void update(String sqlQuery) throws SQLException {
 		Statement statement = (Statement) getConnection().createStatement();
-		
 		statement.executeUpdate(sqlQuery);
 	}
 }

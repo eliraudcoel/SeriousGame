@@ -17,7 +17,7 @@ public class Database {
 	public static Connection connexion() throws SQLException, ClassNotFoundException {
 		Connection connexion = null;
 		Class.forName(driver);
-		connexion = DriverManager.getConnection(url, utilisateur,motDePasse);
+		connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
 		
 		return connexion;
 	}

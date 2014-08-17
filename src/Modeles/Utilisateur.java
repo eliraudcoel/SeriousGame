@@ -31,10 +31,8 @@ public class Utilisateur extends Modele {
 	public static Utilisateur find_by_identification(String login, String mdp) throws SQLException {
 		Utilisateur user = null;
 		
-		// Requête en BDD
 		ResultSet resultat = query( "SELECT id_utilisateur, id_entreprise, login, mdp, email, admin FROM utilisateur WHERE login ='"+ login +"' AND mdp ='"+ mdp +"'");
 		
-		// Tant qu'il y a des resultats on créé un object Pays
 		if( resultat.next() ) {
 			user = new Utilisateur(
 					resultat.getString( "id_utilisateur" ),
@@ -51,10 +49,8 @@ public class Utilisateur extends Modele {
 	public static Utilisateur find_by_email(String email) throws SQLException {
 		Utilisateur user = null;
 		
-		// Requête en BDD
 		ResultSet resultat = query( "SELECT id_utilisateur, id_entreprise, login, mdp, email, admin FROM utilisateur WHERE email ='"+ email +"'");
 		
-		// Tant qu'il y a des resultats on créé un object Pays
 		if( resultat.next() ) {
 			user = new Utilisateur(
 					resultat.getString( "id_utilisateur" ),
@@ -71,10 +67,8 @@ public class Utilisateur extends Modele {
 	public static Utilisateur find(String id_utilisateur) throws SQLException {
 		Utilisateur user = null;
 		
-		// Requête en BDD
 		ResultSet resultat = query( "SELECT id_utilisateur, id_entreprise, login, mdp, email, admin FROM utilisateur WHERE id_utilisateur ='"+ id_utilisateur +"'");
 		
-		// Tant qu'il y a des resultats on créé un object Pays
 		if( resultat.next() ) {
 			user = new Utilisateur(
 					resultat.getString( "id_utilisateur" ),
