@@ -42,6 +42,8 @@ public class Application extends HttpServlet {
 		if(request.getParameter("action").equals("disconnect")){
 			request.setAttribute("disconnect", "true");
 			request.getRequestDispatcher("WEB-INF/disconnect.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
 

@@ -4,6 +4,7 @@
 <%@ page import="Modeles.Partie"%>
 
 <%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
 
 <!-- Insertion Header -->
 <%@ include file="../header.jsp"  %>
@@ -68,28 +69,41 @@
 	
 	
 	<div class="row">
-		<%
-			List<Produit> produits = entreprise.getProduits();
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Produit</th>
+					<th>Quantité en stock</th>
+					<th>Prix d'achat &euro;</th>
+					<th>Quantité d'achat</th>
+					<th>Prix de vente &euro;</th>
+					<th>Quantité de vente</th>
+				</tr>
+			</thead>
+			<tbody>
+			<%
+			ArrayList<Produit> produits = (ArrayList<Produit>) entreprise.getProduits();
 			for(Produit produit : produits) {
-		%>
-		<div class="panel-group" id="accordion">
-		  <div class="panel panel-default">
-		    <div class="panel-heading">
-		      <h4 class="panel-title">
-		        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-		         	<%= produit.getNom_produit() %>
-		        </a>
-		      </h4>
-		    </div>
-		    <div id="collapseOne" class="panel-collapse collapse in">
-		      <div class="panel-body">
-		      
-		      </div>
-		    </div>
-		  </div>
-	  	</div>
-	  	<% } %>
+			%>
+				<tr class="<%= produit.getNom_produit() %>">
+				   <td><%= produit.getNom_produit() %></td>
+				   <td><%= produit.getStock() %></td>
+				   <td><input type="number" value="0" name="prix_achat" class="prix_achat" /></td>
+				   <td><input type="number" value="0" name="qte_achat" class="qte_achat" /></td>
+				   <td><input type="number" value="0" name="prix_vente" class="prix_vente" /></td>
+				   <td><input type="number" value="0" name="qte_vente" class="qte_vente" /></td>
+				</tr>
+			<% } %>
+			</tbody>
+		</table>
 	</div>
+	
+	<div class="jumbotron row">
+	  <h3>Récapitulatif</h3>
+	  <p class="recap"></p>  
+	</div>
+		
+	<button type="submit" formaction="Produits" formmethod="post" class="btn btn-success col-xs-12">Validez !</button>
 	
 <!-- Insertion Footer -->
 <%@ include file="../footer.jsp"  %>

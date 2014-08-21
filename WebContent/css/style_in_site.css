@@ -1,0 +1,9 @@
+@CHARSET "ISO-8859-1";
+
+.navbar {
+	border-radius: 0px !important;
+}
+
+.navbar-nav {
+	color: blue !important;
+}

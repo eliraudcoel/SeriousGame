@@ -11,6 +11,7 @@
 	
 	<%
 		String lien = "Parties?action=show&nb=";
+		String new_lien = "";
 		ArrayList<Partie> finished_parties = (ArrayList<Partie>) request.getAttribute("finished_parties");
 		
 		if(finished_parties.size() > 0) {
@@ -27,10 +28,10 @@
 			<tbody>
 				<%
 					for(Partie partie : finished_parties) {
-						lien = lien + partie.getId_partie();
+						new_lien = lien + partie.getId_partie();
 				%>
 					<tr>
-					   <td><a href="<%= lien %>"><%= partie.getNom_partie() %></a></td>
+					   <td><a href="<%= new_lien %>"><%= partie.getNom_partie() %></a></td>
 					   <td><%= partie.getDate_debut() %></td>
 					   <td>
 					   	<div class="progress">

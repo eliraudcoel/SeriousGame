@@ -48,6 +48,7 @@ public class Produit extends Modele {
 				"nom_produit, image_produit, stock " +
 				"FROM produit WHERE id_entreprise ='"+ id_entreprise +"'";
 		ResultSet resultat = query(query);
+		System.out.println(query);
 		if( resultat.next() ) {
 			produit = new Produit(
 					resultat.getString( "id_produit" ),

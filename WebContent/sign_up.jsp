@@ -24,5 +24,5 @@
         </span>
 		<input type="password" placeholder="Mot de passe" name="mdp" class="form-control"></input>
 	</div>
-	 <button type="submit" class="btn btn-success col-xs-12 sign_in_button">S'inscrire!</button>
+	<button type="submit" class="btn btn-success col-xs-12 sign_in_button">S'inscrire!</button>
 </form>

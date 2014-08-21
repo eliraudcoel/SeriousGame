@@ -3,11 +3,13 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link rel="stylesheet" type="text/css" href="inc/style_in_site.css">
+		<link rel="stylesheet" type="text/css" href="css/style_in_site.css">
 		
 		<!-- JQuery -->
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+		
+		<script src="javascript/produits.js"></script>
 		
 		<!-- Ajout de la librairie BootStrap cf : http://getbootstrap.com/ -->
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
