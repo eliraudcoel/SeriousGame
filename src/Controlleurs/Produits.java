@@ -32,8 +32,12 @@ public class Produits extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		System.out.println(request.getParameter("bois_total_achat"));
+		System.out.println(request.getParameter("bois_total_vente"));
+		
+		// Maintenant faire 2 évenements un type achat et l'autre type vente
+		// Au préalable faire la méthode pour ajouter dans le modele Evenement
 	}
 
 }
