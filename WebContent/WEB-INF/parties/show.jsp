@@ -96,6 +96,7 @@
 	</div>
 	
 	<form action="Produits" method="post" role="form" class="form-horizontal col-xs-12 form_products">
+		<input type="hidden" name="user_id" value="${user.getId()}" />
 		<button type="submit" class="btn btn-success col-xs-12 sign_in_button">Validez!</button>
 	</form>
 

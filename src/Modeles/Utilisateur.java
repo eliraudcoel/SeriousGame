@@ -102,12 +102,13 @@ public class Utilisateur extends Modele {
 	
 	public static String lastId() throws SQLException {
 		String id = "";
+		int ident = 0;
 		List<Utilisateur> users = Utilisateur.all();
 		
 		for (Utilisateur user : users) {
 			id = user.getId();
 		}
-		int ident = Integer.parseInt(id);
+		if(id != "") { ident = Integer.parseInt(id); }
 		ident = ident + 1;
 		return ""+ident;
 	}

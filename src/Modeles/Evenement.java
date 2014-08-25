@@ -1,6 +1,9 @@
 package Modeles;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Evenement extends Modele {
 	
@@ -21,6 +24,38 @@ public class Evenement extends Modele {
 		this.type_evenement = type_evenement;
 		this.quantite = quantite;
 		this.prix = prix;
+	}
+	
+	public static List<Evenement> all() throws SQLException {
+		List<Evenement> results = new ArrayList<Evenement>();
+		
+		ResultSet resultat = query( "SELECT id_evenement, id_produit, id_utilisateur, type_evenement, quantite, prix FROM evenement");
+		while( resultat.next() ) {
+			Evenement evenement = new Evenement(
+					resultat.getString( "id_evenement" ), 
+					resultat.getString( "id_produit" ), 
+					resultat.getString( "id_utilisateur" ),
+					resultat.getString( "type_evenement" ),
+					resultat.getString( "quantite" ),
+					resultat.getString( "prix" )
+			);
+			results.add(evenement);
+		}
+		return results;
+	}
+	
+	public static String lastId() throws SQLException {
+		String id = "";
+		int ident = 0;
+		List<Evenement> evenements = Evenement.all();
+		
+		for (Evenement evenement : evenements) {
+			id = evenement.getId_evenement();
+		}
+		
+		if(id != "") { ident = Integer.parseInt(id); }
+		ident = ident + 1;
+		return ""+ident;
 	}
 	
 	public static void addEvenement(Evenement ev) throws SQLException {

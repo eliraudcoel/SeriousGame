@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Produit extends Modele {
 
+	// PB!!!! Pas l'identifiant de la partie par ex ou du tour!
 	private String id_produit;
 	private String id_entreprise;
 	private String nom_produit;
@@ -48,7 +49,6 @@ public class Produit extends Modele {
 				"nom_produit, image_produit, stock " +
 				"FROM produit WHERE id_entreprise ='"+ id_entreprise +"'";
 		ResultSet resultat = query(query);
-		System.out.println(query);
 		if( resultat.next() ) {
 			produit = new Produit(
 					resultat.getString( "id_produit" ),

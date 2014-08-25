@@ -91,12 +91,14 @@ public class Entreprise extends Modele {
 	
 	public static String lastId() throws SQLException {
 		String id = "";
+		int ident = 0;
 		List<Entreprise> entreprises = Entreprise.all();
 		
 		for (Entreprise entreprise : entreprises) {
 			id = entreprise.getId_entreprise();
 		}
-		int ident = Integer.parseInt(id);
+		
+		if(id != "") { ident = Integer.parseInt(id); }
 		ident = ident + 1;
 		return ""+ident;
 	}
