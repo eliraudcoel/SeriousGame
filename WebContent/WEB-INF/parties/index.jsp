@@ -32,14 +32,20 @@
 				<%
 					for(Partie partie : in_processing_parties) {
 						new_lien = lien + partie.getId_partie();
+						Tour tour = Tour.last_tour_of_partie(partie);
+						int min = Integer.parseInt(tour.getNum_tour());
+						int max = Integer.parseInt(partie.getDuree());
+						float div = min / (float) max;
+						float pourcentage = (div * 100);
 				%>
 					<tr>
 					   <td><a href="<%= new_lien %>"><%= partie.getNom_partie() %></a></td>
 					   <td><%= partie.getDate_debut() %></td>
 					   <td>
 					   	<div class="progress">
-						  <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="<%= partie.getDuree() %>" style="width: 80%;">
-						    3/<%= partie.getDuree() %>
+						  <div class="progress-bar" role="progressbar" aria-valuenow="<%= tour.getNum_tour() %>" aria-valuemin="0" 
+						  aria-valuemax="<%= partie.getDuree() %>" style="width: <%= pourcentage %>%;">
+						    <%= tour.getNum_tour()+ "/" +partie.getDuree() %>
 						  </div>
 						</div>
 					   </td>
@@ -78,7 +84,8 @@
 						Tour tour = Tour.last_tour_of_partie(partie);
 						int min = Integer.parseInt(tour.getNum_tour());
 						int max = Integer.parseInt(partie.getDuree());
-						float pourcentage = (min / max)*100;
+						float div = min / (float) max;
+						float pourcentage = (div * 100);
 				%>
 					<tr>
 					   <td><a href="<%= lien %>"><%= partie.getNom_partie() %></a></td>
@@ -86,7 +93,7 @@
 					   <td>
 					   	<div class="progress">
 						  <div class="progress-bar" role="progressbar" aria-valuenow="<%= tour.getNum_tour() %>" aria-valuemin="0" 
-						  aria-valuemax="<%= partie.getDuree() %>" style="width: <%= pourcentage%>%;">
+						  aria-valuemax="<%= partie.getDuree() %>" style="width: <%= pourcentage %>%;">
 						    <%= tour.getNum_tour()+ "/" +partie.getDuree() %>
 						  </div>
 						</div>

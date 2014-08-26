@@ -2,6 +2,7 @@
 <%@page import="Modeles.Utilisateur"%>
 <%@page import="Modeles.Entreprise"%>
 <%@ page import="Modeles.Partie"%>
+<%@ page import="Modeles.Tour"%>
 
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
@@ -13,6 +14,8 @@
 		Partie partie = (Partie) request.getAttribute("partie");
 		Utilisateur user = (Utilisateur) session.getAttribute("user");
 		Entreprise entreprise = user.getEntreprise();
+		
+		Tour tour = Tour.last_tour_of_partie(partie);
 	%>
 	<div class="row">
 		<h2 class="col-xs-12">Partie <%= partie.getNom_partie() %></h2>
@@ -23,14 +26,7 @@
 			<span class="glyphicon glyphicon-pushpin"></span> Règles de la partie :
 		</h2>
 		<p class="col-xs-12">
-			Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt 
-			ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation 
-			ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor 
-			in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at 
-			vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore 
-			te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming 
-			id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui 
-			facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius.
+			<%= tour.getRegle() %>
 		</p>
 	</div>
 	
