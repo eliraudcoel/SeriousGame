@@ -21,9 +21,11 @@ public class Partie extends Modele {
 	private String date_debut;
 	private String date_fin;
 	
+	private List<Tour> tours;
+	
 	public Partie(String id_partie, String nom_partie, String duree,
 			String capital_depart, String cout_salaire, String cout_charge_exp,
-			String cout_loyer, String date_debut, String date_fin) {
+			String cout_loyer, String date_debut, String date_fin) throws SQLException {
 		super();
 		this.id_partie = id_partie;
 		this.nom_partie = nom_partie;
@@ -34,6 +36,7 @@ public class Partie extends Modele {
 		this.cout_loyer = cout_loyer;
 		this.date_debut = date_debut;
 		this.date_fin = date_fin;
+		this.tours = Tour.find_by_partie(id_partie);
 	}
 
 	public static List<Partie> all() throws SQLException {
@@ -207,5 +210,9 @@ public class Partie extends Modele {
 
 	public void setNom_partie(String nom_partie) {
 		this.nom_partie = nom_partie;
+	}
+	
+	public List<Tour> getTours() {
+		return tours;
 	}
 }

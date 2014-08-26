@@ -34,8 +34,7 @@ public class Produits extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getAttribute("message") != null){
-			// TODO A FIXER
-			request.getRequestDispatcher("Parties?action=index").forward(request, response);
+			response.sendRedirect("Parties?action=index");
 		}
 	}
 

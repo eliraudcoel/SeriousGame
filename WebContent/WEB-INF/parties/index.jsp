@@ -1,3 +1,4 @@
+<%@page import="Modeles.Tour"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -74,14 +75,19 @@
 					ArrayList<Partie> not_started_parties = (ArrayList<Partie>) request.getAttribute("not_started_games");
 					
 					for(Partie partie : not_started_parties) {
+						Tour tour = Tour.last_tour_of_partie(partie);
+						int min = Integer.parseInt(tour.getNum_tour());
+						int max = Integer.parseInt(partie.getDuree());
+						float pourcentage = (min / max)*100;
 				%>
 					<tr>
 					   <td><a href="<%= lien %>"><%= partie.getNom_partie() %></a></td>
 					   <td><%= partie.getDate_debut() %></td>
 					   <td>
 					   	<div class="progress">
-						  <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="<%= partie.getDuree() %>" style="width: 60%;">
-						    2/<%= partie.getDuree() %>
+						  <div class="progress-bar" role="progressbar" aria-valuenow="<%= tour.getNum_tour() %>" aria-valuemin="0" 
+						  aria-valuemax="<%= partie.getDuree() %>" style="width: <%= pourcentage%>%;">
+						    <%= tour.getNum_tour()+ "/" +partie.getDuree() %>
 						  </div>
 						</div>
 					   </td>
