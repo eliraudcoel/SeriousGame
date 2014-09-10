@@ -14,13 +14,16 @@
 		Partie partie = (Partie) request.getAttribute("partie");
 		Utilisateur user = (Utilisateur) session.getAttribute("user");
 		Entreprise entreprise = user.getEntreprise();
+		Tour tour = null;
 		
-		Tour tour = Tour.last_tour_of_partie(partie);
+		if(partie.is_processing()){
+			tour = Tour.last_tour_of_partie(partie);
+		}
 	%>
 	<div class="row">
 		<h2 class="col-xs-12">Partie <%= partie.getNom_partie() %></h2>
 	</div>
-	
+	<% if(tour != null) { %>
 	<div class="row">
 		<h2 class="col-xs-12">
 			<span class="glyphicon glyphicon-pushpin"></span> Règles de la partie :
@@ -29,6 +32,7 @@
 			<%= tour.getRegle() %>
 		</p>
 	</div>
+	<% } %>
 	
 	<div class="row">
 		<table class="table table-hover">

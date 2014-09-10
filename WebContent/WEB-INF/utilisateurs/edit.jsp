@@ -5,12 +5,10 @@
 <!-- Insertion Header -->
 <%@ include file="../header.jsp"  %>
 	
-	<% if(request.getAttribute("message_email") != null || request.getAttribute("message_mdp") != null) { %>
+	<% if(request.getAttribute("message_ent") != null && request.getAttribute("message_mdp") != null) { %>
 		<div class="row alert alert-danger alert-dismissible" role="alert">
 			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			<% if(request.getAttribute("message_email") != null) { %>
-			<strong>Attention! </strong><%= request.getAttribute("message_email") %>
-			<% }
+			<%
 			   if(request.getAttribute("message_mdp") != null) {
 			%>
 			<strong>Attention! </strong><%= request.getAttribute("message_mdp") %>
@@ -35,10 +33,6 @@
 				<% Entreprise entreprise = user.getEntreprise();%>
 				<label class="col-xs-12">Entreprise :</label>
 				<input placeholder="Entreprise" name="entreprise" class="form-control" value="<%= entreprise.getNom_entreprise() %>" />
-			</div>
-			<div class="form-group">
-				<label class="col-xs-12">Email :</label>
-				<input placeholder="Email" name="email" class="form-control" value="${user.getEmail()}" />
 			</div>
 			<div class="form-group">
 				<label class="col-xs-12">Login :</label>

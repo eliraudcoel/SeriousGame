@@ -92,14 +92,13 @@ public class Entreprise extends Modele {
 	public static String lastId() throws SQLException {
 		String id = "";
 		int ident = 0;
-		List<Entreprise> entreprises = Entreprise.all();
+		ResultSet resultat = query( "SELECT max(id_entreprise) max_id FROM entreprise");
 		
-		for (Entreprise entreprise : entreprises) {
-			id = entreprise.getId_entreprise();
+		while( resultat.next() ) {
+			id = resultat.getString("max_id");
 		}
-		
-		if(id != "") { ident = Integer.parseInt(id); }
-		ident = ident + 1;
+		ident = Integer.parseInt(id);
+		ident++;
 		return ""+ident;
 	}
 	

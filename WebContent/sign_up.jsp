@@ -8,12 +8,6 @@
 	</div>
 	<div class="input-group">
 	 	<span class="input-group-addon">
-          <span class="glyphicon glyphicon-envelope"></span>
-        </span>
-		<input placeholder="Email" name="email" class="form-control"></input>
-	</div>
-	<div class="input-group">
-	 	<span class="input-group-addon">
           <span class="glyphicon glyphicon-user"></span>
         </span>
 		<input placeholder="Login" name="login" class="form-control"></input>

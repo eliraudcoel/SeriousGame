@@ -8,10 +8,18 @@ import java.sql.SQLException;
 public class Database {
 	
 	// On met en static les données pour se connecter à la BDD - ils ne sont pas censés changer et etre changer
+	/* Config mysql */
+	/*
 	public static String driver = "com.mysql.jdbc.Driver";
 	public static String url = "jdbc:mysql://127.0.0.1/playbusiness";
 	public static String utilisateur = "root";
 	public static String motDePasse = "";
+	*/
+	
+	public static String driver = "oracle.jdbc.driver.OracleDriver";
+	public static String url = "jdbc:oracle:thin:@bs-it.fr:1521:xe";
+	public static String utilisateur = "serious_admin";
+	public static String motDePasse = "serious_admin";
 	
 	// Méthode connexion() qui permet de se connecter à la BDD
 	public static Connection connexion() throws SQLException, ClassNotFoundException {

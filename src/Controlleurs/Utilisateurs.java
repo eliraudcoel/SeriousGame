@@ -34,25 +34,12 @@ public class Utilisateurs extends HttpServlet {
 		if( request.getParameter("action") != null)
 			if(request.getParameter("action").equals("edit"))
 				request.getRequestDispatcher("WEB-INF/utilisateurs/edit.jsp").forward(request, response);
-		if (request.getAttribute("action") != null)
-			if(request.getAttribute("action").equals("edit"))
-				request.getRequestDispatcher("WEB-INF/utilisateurs/edit.jsp").forward(request, response);
 	}
 	
 	protected boolean verifMdp(String mdp, String mdp_confirmation) {
 		boolean ok = false;
 		
 		if( mdp == mdp_confirmation)
-			ok = true;
-		
-		return ok;
-	}
-	
-	protected boolean verifEmail(String email, Utilisateur current_user) throws SQLException {
-		boolean ok = false;
-		Utilisateur user = Utilisateur.find_by_email(email);
-		
-		if (user != current_user || user == null)
 			ok = true;
 		
 		return ok;
@@ -80,14 +67,12 @@ public class Utilisateurs extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String message_mdp = "", message_email = "", message_ent = "";
+		String message_mdp = "", message_ent = "";
 		boolean mdp_ok = false;
-		boolean email_ok = false;
 		boolean ent_ok = false;
 		Utilisateur user = null;
 		Entreprise entreprise = null;
 		
-		String email = request.getParameter("email");
 		String login = request.getParameter("login");
 		String mdp = request.getParameter("mdp");
 		String mdp_confirmation = request.getParameter("mdp_confirmation");
@@ -104,18 +89,6 @@ public class Utilisateurs extends HttpServlet {
 				else
 					message_mdp = "Vous devez remplir le mot de passe et la confirmation";
 			}
-			
-			if(email != "") {
-				try {
-					email_ok = verifEmail(email, user);
-					if(email_ok)
-						user.update_by_params("email", email);
-					else
-						message_email = "L'email que vous avez rentrer est déjà utilisé";
-				} catch (SQLException e) {
-					e.getMessage();
-				}
-			}
 			if(login != "") {
 				user.update_by_params("login", login);
 			}
@@ -127,8 +100,6 @@ public class Utilisateurs extends HttpServlet {
 					message_ent = "Le nom d'entreprise que vous avez rentrer est déjà utilisé";
 			}
 			
-			if (message_email != "")
-				request.setAttribute("message_email", message_email);
 			if (message_mdp != "")
 				request.setAttribute("message_mdp", message_mdp);
 			if (message_ent != "")

@@ -136,8 +136,13 @@ public class Partie extends Modele {
 		return partie;
 	}
 	
+	public int nombre_joueurs() throws SQLException {
+		ArrayList<Participation> participations = (ArrayList<Participation>) Participation.find_by_partie(this);
+		return participations.size();
+	}
+	
 	public void add_user(Utilisateur user) throws SQLException {
-		update("Insert into jouer values('"+this.getId_partie()+"','"+user.getId()+"')");
+		Participation.addParticipant(user, this);
 	}
 
 	public String getId_partie() {

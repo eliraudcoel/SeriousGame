@@ -5,8 +5,7 @@ import Config.Database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import com.mysql.jdbc.Statement;
+import java.sql.Statement;
 
 // Classe hérité par Pays, Groupe et Match
 public class Modele {

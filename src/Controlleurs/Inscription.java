@@ -41,7 +41,7 @@ public class Inscription extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("login") != " " && request.getParameter("mdp") != " " && request.getParameter("email") != " " && request.getParameter("entreprise") != " ") {
+		if(request.getParameter("login") != " " && request.getParameter("mdp") != " " && request.getParameter("entreprise") != " ") {
 			String id_utilisateur;
 			String id_entreprise;
 			Entreprise entreprise = null;
@@ -54,8 +54,7 @@ public class Inscription extends HttpServlet {
 						id_utilisateur,
 						id_entreprise,
 						request.getParameter("login"), 
-						request.getParameter("mdp"), 
-						request.getParameter("email"), 
+						request.getParameter("mdp"),
 						"0");			
 				try {
 					Utilisateur.addUser(user);
