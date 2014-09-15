@@ -5,17 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 // Classe Database qui va s'occuper QUE de la connection avec la Base de données (BDD)
-public class Database {
-	
-	// On met en static les données pour se connecter à la BDD - ils ne sont pas censés changer et etre changer
-	/* Config mysql */
-	/*
-	public static String driver = "com.mysql.jdbc.Driver";
-	public static String url = "jdbc:mysql://127.0.0.1/playbusiness";
-	public static String utilisateur = "root";
-	public static String motDePasse = "";
-	*/
-	
+public class Database {	
 	public static String driver = "oracle.jdbc.driver.OracleDriver";
 	public static String url = "jdbc:oracle:thin:@bs-it.fr:1521:xe";
 	public static String utilisateur = "serious_admin";

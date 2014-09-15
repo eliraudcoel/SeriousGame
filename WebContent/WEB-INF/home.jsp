@@ -1,7 +1,5 @@
 <%@page import="Modeles.Utilisateur"%>
-
-<!-- Insertion Header -->
-<%@ include file="header.jsp"  %>
+<%@ include file="header_global.jsp"  %>
 
 <%
 	Utilisateur user;
@@ -12,6 +10,7 @@
 		user = (Utilisateur) session.getAttribute("user"); 
 	}
 %>
+
 <h2>Vous êtes connecté <%= user.getLogin() %>!</h2>
 
 <!-- Insertion Footer -->

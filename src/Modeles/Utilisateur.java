@@ -26,19 +26,36 @@ public class Utilisateur extends Modele {
 		this.entreprise = Entreprise.find(id_entreprise);
 	}
 
+	public Utilisateur(String id, String login, String mdp, String admin) {
+		super();
+		this.id = id;
+		this.login = login;
+		this.mdp = mdp;
+		this.admin = admin;
+	}
+
 	public static Utilisateur find_by_identification(String login, String mdp) throws SQLException {
 		Utilisateur user = null;
 		
 		ResultSet resultat = query( "SELECT id_utilisateur, id_entreprise, login, mdp, admin FROM utilisateur WHERE login ='"+ login +"' AND mdp ='"+ mdp +"'");
 		
 		if( resultat.next() ) {
-			user = new Utilisateur(
-					resultat.getString( "id_utilisateur" ),
-					resultat.getString( "id_entreprise" ),
-					resultat.getString( "login" ), 
-					resultat.getString( "mdp" ),
-					resultat.getString( "admin" )
-			);
+			if(resultat.getString( "id_entreprise" ) != null) {
+				user = new Utilisateur(
+						resultat.getString( "id_utilisateur" ),
+						resultat.getString( "id_entreprise" ),
+						resultat.getString( "login" ), 
+						resultat.getString( "mdp" ),
+						resultat.getString( "admin" )
+				);
+			} else {
+				user = new Utilisateur(
+						resultat.getString( "id_utilisateur" ),
+						resultat.getString( "login" ), 
+						resultat.getString( "mdp" ),
+						resultat.getString( "admin" )
+				);
+			}
 		}
 		return user;
 	}
@@ -111,12 +128,23 @@ public class Utilisateur extends Modele {
 		update("INSERT into utilisateur VALUES('"+user.getId()+"','"+user.getId_entreprise()+"','"+user.getLogin()+"','"+user.getMdp()+"','"+user.getAdmin()+"')");
 	}
 	
+	public static void addUserWithoutEntreprise(Utilisateur user) throws SQLException {
+		update("INSERT into utilisateur (id_utilisateur, login, mdp, admin) VALUES('"+user.getId()+"','"+user.getLogin()+"','"+user.getMdp()+"','"+user.getAdmin()+"')");
+	}
+	
 	public static void updateUser(Utilisateur user) throws SQLException {
 		update("UPDATE utilisateur SET login = '"+user.getLogin()+"', mdp = '"+user.getMdp()+"' WHERE id_utilisateur = '"+ user.getId() +"'");
 	}
 	
 	public void update_by_params(String params_type, String params) throws SQLException {
 		update("UPDATE utilisateur SET "+ params_type +" = '"+ params +"' WHERE id_utilisateur = '"+ this.getId() +"'");
+	}
+	
+	public boolean is_admin() {
+		if(this.getAdmin().equals("1"))
+			return true;
+		else
+			return false;
 	}
 
 	public String getId() {
@@ -148,6 +176,9 @@ public class Utilisateur extends Modele {
 	}
 	public void setAdmin(String admin) {
 		this.admin = admin;
+	}
+	public void setEntreprise() throws SQLException {
+		this.entreprise = Entreprise.find(id_entreprise);
 	}
 	public Entreprise getEntreprise() {
 		return entreprise;

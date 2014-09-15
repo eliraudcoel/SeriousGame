@@ -15,13 +15,14 @@
 		<strong>Attention! </strong><%= request.getAttribute("message") %>
 	</div>
 	<% } %>
-	
-	<div class="row">
-		<div class="sign_in col-xs-12 col-md-5">
-			<%@ include file="sign_in.jsp"  %>
-		</div>
-		<div class="sign_up col-xs-12 col-md-5">
-			<%@ include file="sign_up.jsp"  %>
+	<div class="container">
+		<div class="row">
+			<div class="sign_in col-xs-12 col-md-5">
+				<%@ include file="sign_in.jsp"  %>
+			</div>
+			<div class="sign_up col-xs-12 col-md-5">
+				<%@ include file="sign_up.jsp"  %>
+			</div>
 		</div>
 	</div>
 <!-- Insertion Footer -->

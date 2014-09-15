@@ -27,8 +27,6 @@ public class Entreprise extends Modele {
 	
 	public static Entreprise find(String id_entreprise) throws SQLException {
 		Entreprise entreprise = null;
-		
-
 		ResultSet resultat = query( "SELECT id_entreprise, id_utilisateur, nom_entreprise " +
 				"FROM entreprise WHERE id_entreprise ='"+ id_entreprise +"'");
 		

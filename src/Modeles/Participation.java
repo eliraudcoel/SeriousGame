@@ -17,7 +17,6 @@ public class Participation extends Modele {
 
 	public static void addParticipant(Utilisateur user, Partie partie) throws SQLException {
 		String query = "INSERT into jouer VALUES('"+user.getId()+"', '"+partie.getId_partie()+"')";
-		System.out.println("QUERY :"+query);
 		update(query);
 	}
 	
@@ -36,13 +35,15 @@ public class Participation extends Modele {
 	}
 	
 	public static List<Participation> find_by_partie(Partie partie) throws SQLException {
-		List<Participation> results = Participation.all();
 		List<Participation> participations = new ArrayList<Participation>();
+		ResultSet resultat = query( "SELECT id_utilisateur, id_partie FROM jouer WHERE id_partie ='"+ partie.getId_partie()+"'");
 		
-		for (Participation participation : results) {
-			if(participation.getId_partie() == partie.getId_partie()) {
-				participations.add(participation);
-			}
+		while( resultat.next() ) {
+			Participation participation = new Participation(
+					resultat.getString( "id_utilisateur" ),
+					resultat.getString( "id_partie" )
+			);
+			participations.add(participation);
 		}
 		
 		return participations;

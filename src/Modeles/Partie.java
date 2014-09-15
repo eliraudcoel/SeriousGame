@@ -38,6 +38,21 @@ public class Partie extends Modele {
 		this.date_fin = date_fin;
 		this.tours = Tour.find_by_partie(id_partie);
 	}
+	
+	public Partie(String id_partie, String nom_partie, String duree,
+			String capital_depart, String cout_salaire, String cout_charge_exp,
+			String cout_loyer, String date_debut) throws SQLException {
+		super();
+		this.id_partie = id_partie;
+		this.nom_partie = nom_partie;
+		this.duree = duree;
+		this.capital_depart = capital_depart;
+		this.cout_salaire = cout_salaire;
+		this.cout_charge_exp = cout_charge_exp;
+		this.cout_loyer = cout_loyer;
+		this.date_debut = date_debut;
+		this.tours = Tour.find_by_partie(id_partie);
+	}
 
 	public static List<Partie> all() throws SQLException {
 		List<Partie> results = new ArrayList<Partie>();
@@ -62,8 +77,7 @@ public class Partie extends Modele {
 		return results;
 	}
 	
-	public static List<Partie> in_processing_partie() throws SQLException, ParseException {
-		List<Partie> results = Partie.all();
+	public static List<Partie> in_processing_partie(List<Partie> results) throws SQLException, ParseException {
 		List<Partie> process_parties = new ArrayList<Partie>();
 		
 		for (Partie partie : results) {
@@ -75,8 +89,7 @@ public class Partie extends Modele {
 		return process_parties;
 	}
 	
-	public static List<Partie> not_started_partie() throws SQLException, ParseException {
-		List<Partie> results = Partie.all();
+	public static List<Partie> not_started_partie(List<Partie> results) throws SQLException, ParseException {
 		List<Partie> not_started_parties = new ArrayList<Partie>();
 		
 		for (Partie partie : results) {
@@ -88,8 +101,7 @@ public class Partie extends Modele {
 		return not_started_parties;
 	}
 	
-	public static List<Partie> finished_partie() throws SQLException, ParseException {
-		List<Partie> results = Partie.all();
+	public static List<Partie> finished_partie(List<Partie> results) throws SQLException, ParseException {
 		List<Partie> finished_parties = new ArrayList<Partie>();
 		
 		for (Partie partie : results) {
@@ -140,9 +152,36 @@ public class Partie extends Modele {
 		ArrayList<Participation> participations = (ArrayList<Participation>) Participation.find_by_partie(this);
 		return participations.size();
 	}
+
+	public static String lastId() throws SQLException {
+		String id = "";
+		int ident = 0;
+		ResultSet resultat = query( "SELECT max(id_partie) max_id FROM partie");
+		
+		while( resultat.next() ) {
+			id = resultat.getString("max_id");
+		}
+		ident = Integer.parseInt(id);
+		ident++;
+		return ""+ident;
+	}
+
+	public void add_partie() throws SQLException {
+		update("insert into partie " +
+				"(id_partie, nom_partie, duree, capital_depart, cout_salaire, cout_charge_exp, cout_loyer, date_debut)"+
+				"values('"+this.getId_partie()+"','"+this.getNom_partie()+"','"+this.getDuree()+
+				"','"+this.getCapital_depart()+"','"+this.getCout_salaire()+"','"+this.getCout_charge_exp()+
+				"','"+this.getCout_loyer()+"','"+this.getDate_debut()+"')");
+	}
 	
-	public void add_user(Utilisateur user) throws SQLException {
-		Participation.addParticipant(user, this);
+	public static boolean get_participe(Utilisateur user, Partie partie) throws SQLException {
+		boolean has_participe = false;
+		ResultSet resultat = query( "SELECT id_utilisateur, id_partie FROM jouer WHERE id_partie='"+ partie.getId_partie()+"' AND id_utilisateur='"+ user.getId()+"'");
+		
+		if(resultat.next()) {
+			has_participe = true;
+		}
+		return has_participe;
 	}
 
 	public String getId_partie() {

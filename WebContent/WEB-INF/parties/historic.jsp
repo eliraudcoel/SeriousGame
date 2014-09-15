@@ -3,14 +3,14 @@
 <%@ page import="java.util.ArrayList"%>
 
 <!-- Insertion Header -->
-<%@ include file="../header.jsp"  %>
+<%@ include file="../header_global.jsp"  %>
 
 <div class="row">
 		<h2 class="col-xs-12">La liste des parties antérieures :</h2>
 	</div>
 	
 	<%
-		String lien = "Parties?action=show&nb=";
+		String lien = "Parties?action=show_finish&nb=";
 		String new_lien = "";
 		ArrayList<Partie> finished_parties = (ArrayList<Partie>) request.getAttribute("finished_parties");
 		

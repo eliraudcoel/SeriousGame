@@ -8,7 +8,7 @@
 <%@ page import="java.util.ArrayList"%>
 
 <!-- Insertion Header -->
-<%@ include file="../header.jsp"  %>
+<%@ include file="../header_global.jsp"  %>
 
 	<%
 		Partie partie = (Partie) request.getAttribute("partie");

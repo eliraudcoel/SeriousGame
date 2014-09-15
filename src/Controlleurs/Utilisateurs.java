@@ -31,9 +31,14 @@ public class Utilisateurs extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if( request.getParameter("action") != null)
+		if(request.getParameter("action") != null) {
 			if(request.getParameter("action").equals("edit"))
 				request.getRequestDispatcher("WEB-INF/utilisateurs/edit.jsp").forward(request, response);
+		}
+		if(request.getAttribute("action") != null) {
+			if(request.getAttribute("action").equals("edit"))
+				request.getRequestDispatcher("WEB-INF/utilisateurs/edit.jsp").forward(request, response);
+		}
 	}
 	
 	protected boolean verifMdp(String mdp, String mdp_confirmation) {
@@ -106,13 +111,11 @@ public class Utilisateurs extends HttpServlet {
 				request.setAttribute("message_ent", message_ent);
 			
 			updateUserInSession(request);
-			
-			request.setAttribute("action", "edit");
-			
-			doGet(request, response);
 		} catch (SQLException e) {
 			e.getMessage();
-		}		
+		}
+		
+		request.setAttribute("action", "edit");
+		doGet(request, response);
 	}
-
 }

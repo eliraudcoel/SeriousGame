@@ -48,20 +48,25 @@ public class Inscription extends HttpServlet {
 			try {
 				id_utilisateur = Utilisateur.lastId();
 				id_entreprise = Entreprise.lastId();
-				entreprise = new Entreprise(id_entreprise, id_utilisateur, request.getParameter("entreprise"));
-				Entreprise.addEntreprise(entreprise);
 				Utilisateur user = new Utilisateur(
 						id_utilisateur,
-						id_entreprise,
 						request.getParameter("login"), 
 						request.getParameter("mdp"),
-						"0");			
+						"0");
+				
 				try {
-					Utilisateur.addUser(user);
+					Utilisateur.addUserWithoutEntreprise(user);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
+				entreprise = new Entreprise(id_entreprise, id_utilisateur, request.getParameter("entreprise"));
+				Entreprise.addEntreprise(entreprise);
+				
+				user.setId_entreprise(id_entreprise);
+				user.setEntreprise();
+				Utilisateur.updateUser(user);
 				
 				request.setAttribute("user", user);
 				doGet(request, response);

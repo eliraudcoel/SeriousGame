@@ -3,7 +3,7 @@
 <%@ page import="Modeles.Entreprise"%>
 
 <!-- Insertion Header -->
-<%@ include file="../header.jsp"  %>
+<%@ include file="../header_global.jsp"  %>
 	
 	<% if(request.getAttribute("message_ent") != null && request.getAttribute("message_mdp") != null) { %>
 		<div class="row alert alert-danger alert-dismissible" role="alert">
@@ -32,7 +32,7 @@
 			<div class="form-group">
 				<% Entreprise entreprise = user.getEntreprise();%>
 				<label class="col-xs-12">Entreprise :</label>
-				<input placeholder="Entreprise" name="entreprise" class="form-control" value="<%= entreprise.getNom_entreprise() %>" />
+				<input placeholder="Entreprise" name="entreprise" class="form-control" value="<%= entreprise != null ? entreprise.getNom_entreprise() : "" %>" />
 			</div>
 			<div class="form-group">
 				<label class="col-xs-12">Login :</label>
