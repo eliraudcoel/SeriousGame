@@ -148,8 +148,24 @@ public class Partie extends Modele {
 		return partie;
 	}
 	
+	public ArrayList<Participation> get_all_participations() throws SQLException {
+		return (ArrayList<Participation>) Participation.find_by_partie(this);
+	}
+	
+	public List<Utilisateur> get_all_utilisateurs() throws SQLException {
+		ArrayList<Participation> participations = get_all_participations();
+		List<Utilisateur> users = new ArrayList<Utilisateur>();
+		Utilisateur user = null;
+		
+		for (Participation participation : participations) {
+			user = Utilisateur.find(participation.getId_utilisateur());
+			users.add(user);
+		}
+		return users;
+	}
+	
 	public int nombre_joueurs() throws SQLException {
-		ArrayList<Participation> participations = (ArrayList<Participation>) Participation.find_by_partie(this);
+		ArrayList<Participation> participations = get_all_participations();
 		return participations.size();
 	}
 
@@ -172,11 +188,14 @@ public class Partie extends Modele {
 				"values('"+this.getId_partie()+"','"+this.getNom_partie()+"','"+this.getDuree()+
 				"','"+this.getCapital_depart()+"','"+this.getCout_salaire()+"','"+this.getCout_charge_exp()+
 				"','"+this.getCout_loyer()+"','"+this.getDate_debut()+"')");
+		
+		Tour tour = new Tour(Tour.lastId(), this.getId_partie(), "1", "", "1");
+		Tour.add_tour(tour);
 	}
 	
-	public static boolean get_participe(Utilisateur user, Partie partie) throws SQLException {
+	public boolean is_participe(Utilisateur user) throws SQLException {
 		boolean has_participe = false;
-		ResultSet resultat = query( "SELECT id_utilisateur, id_partie FROM jouer WHERE id_partie='"+ partie.getId_partie()+"' AND id_utilisateur='"+ user.getId()+"'");
+		ResultSet resultat = query( "SELECT id_utilisateur, id_partie FROM jouer WHERE id_partie='"+ this.getId_partie()+"' AND id_utilisateur='"+ user.getId()+"'");
 		
 		if(resultat.next()) {
 			has_participe = true;

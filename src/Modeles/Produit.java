@@ -45,11 +45,9 @@ public class Produit extends Modele {
 	public static List<Produit> find_by_entreprise(String id_entreprise) throws SQLException {
 		List<Produit> produits = new ArrayList<Produit>();
 		Produit produit = null;
-		String query = "SELECT id_produit, id_entreprise, " +
-				"nom_produit, image_produit, stock " +
-				"FROM produit WHERE id_entreprise ='"+ id_entreprise +"'";
-		ResultSet resultat = query(query);
-		if( resultat.next() ) {
+		ResultSet resultat = query("SELECT id_produit, id_entreprise, nom_produit, image_produit, stock " +
+				"FROM produit WHERE id_entreprise ='"+ id_entreprise +"'");
+		while( resultat.next() ) {
 			produit = new Produit(
 					resultat.getString( "id_produit" ),
 					resultat.getString( "id_entreprise" ), 
@@ -59,6 +57,7 @@ public class Produit extends Modele {
 			);
 			produits.add(produit);
 		}
+		
 		return produits;
 	}
 

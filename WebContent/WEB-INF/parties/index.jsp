@@ -47,7 +47,7 @@
 				   	<div class="progress">
 					  <div class="progress-bar" role="progressbar" aria-valuenow="<%= tour.getNum_tour() %>" aria-valuemin="0" 
 					  aria-valuemax="<%= partie.getDuree() %>" style="width: <%= pourcentage %>%;">
-					    <%= tour.getNum_tour()+ "/" +partie.getDuree() %>
+					    <%= tour.getNum_tour() + "/" +partie.getDuree() %>
 					  </div>
 					</div>
 				   </td>
@@ -93,7 +93,7 @@
 						<input type="hidden" name="type_post" value="participer" />
 						<input type="hidden" name="user_id" value="<%= user.getId() %>" />
 						<input type="hidden" name="partie_id" value="<%= partie.getId_partie()%>" />
-						<% if(Partie.get_participe(user, partie) == true) {%>
+						<% if(partie.is_participe(user) == true) {%>
 							<span class="col-xs-12">Vous y participez!</span>
 						<% } else { %>
 							<button type="submit" class="btn col-xs-12"> Jouer ! </button>

@@ -37,8 +37,8 @@ public class Associer extends Modele {
 	public static Associer find_by_entreprise(String id_entreprise, String id_tour) throws SQLException {
 		Associer associer = null;
 		
-		ResultSet resultat = query( "SELECT id_tour, id_entreprise, capital_actuel FROM associer" +
-				"WHERE id_entreprise="+ id_entreprise+"AND id_tour="+ id_tour);
+		ResultSet resultat = query( "SELECT id_tour, id_entreprise, capital_actuel FROM associer " +
+				"WHERE id_entreprise='"+ id_entreprise+"' AND id_tour='"+ id_tour+"'");
 		if( resultat.next() ) {
 			associer = new Associer(
 					resultat.getString( "id_tour" ), 

@@ -44,7 +44,7 @@ public class Tour extends Modele {
 		List<Tour> results = new ArrayList<Tour>();
 		
 		ResultSet resultat = query( "SELECT id_tour, id_partie, num_tour, regle, tour_actuel " +
-				"FROM tour WHERE id_partie='"+ id_partie +"'");
+				"FROM tour WHERE id_partie='"+ id_partie +"' ORDER BY num_tour ASC");
 		while( resultat.next() ) {
 			Tour tour = new Tour(
 					resultat.getString( "id_tour" ),
@@ -56,6 +56,19 @@ public class Tour extends Modele {
 			results.add(tour);
 		}
 		return results;
+	}
+	
+	public static String lastId() throws SQLException {
+		String id = "";
+		int ident = 0;
+		ResultSet resultat = query( "SELECT max(id_tour) max_id FROM tour");
+		
+		while( resultat.next() ) {
+			id = resultat.getString("max_id");
+		}
+		ident = Integer.parseInt(id);
+		ident++;
+		return ""+ident;
 	}
 	
 	public static Tour last_tour_of_partie(Partie partie) throws SQLException {
@@ -74,6 +87,12 @@ public class Tour extends Modele {
 		}
 		
 		return tour;
+	}
+	
+	public static void add_tour(Tour tour) throws SQLException {
+		update("insert into tour (id_tour, id_partie, num_tour, regle, tour_actuel)" +
+				"values('"+tour.getId_tour()+"','"+tour.getId_partie()+"','"+tour.getNum_tour()+
+				"','"+tour.getRegle()+"','"+tour.getTour_actuel()+"')");
 	}
 	
 	public String getId_tour() {

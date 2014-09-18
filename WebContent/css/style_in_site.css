@@ -3,3 +3,7 @@
 .navbar {
 	border-radius: 0px !important;
 }
+
+input[type=number] {
+	width: 70px;
+}
