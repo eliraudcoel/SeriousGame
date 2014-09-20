@@ -58,6 +58,25 @@ public class Evenement extends Modele {
 		return ""+ident;
 	}
 	
+	public static ArrayList<Evenement> find_by_utilisateur(String id_utilisateur) throws SQLException {
+		Evenement evenement = null;
+		 ArrayList<Evenement> evenements = null;
+		ResultSet resultat = query( "SELECT id_evenement, id_produit, id_utilisateur, type_evenement, quantite, prix FROM evenement " +
+				"WHERE id_utilisateur='"+ id_utilisateur+"'");
+		while( resultat.next() ) {
+			evenement = new Evenement(
+					resultat.getString( "id_evenement" ), 
+					resultat.getString( "id_produit" ), 
+					resultat.getString( "id_utilisateur" ),
+					resultat.getString( "type_evenement" ),
+					resultat.getString( "quantite" ),
+					resultat.getString( "prix" )
+			);
+			evenements.add(evenement);
+		}
+		return evenements;
+	}
+	
 	public static void addEvenement(Evenement ev) throws SQLException {
 		update("INSERT into evenement VALUES('"+ev.getId_evenement()+"', '"+ev.getId_produit()+"', '"+ev.getId_utilisateur()+"', '"+ev.getType_evenement()+"', '"+ev.getQuantite()+"', '"+ev.getPrix()+"')");
 	}

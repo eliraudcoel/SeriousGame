@@ -23,7 +23,9 @@ public class Utilisateur extends Modele {
 		this.login = login;
 		this.mdp = mdp;
 		this.admin = admin;
-		this.entreprise = Entreprise.find(id_entreprise);
+		if(admin.equals("0")) {
+			this.entreprise = Entreprise.find(id_entreprise);
+		}
 	}
 
 	public Utilisateur(String id, String login, String mdp, String admin) {

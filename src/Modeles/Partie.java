@@ -81,7 +81,7 @@ public class Partie extends Modele {
 		List<Partie> process_parties = new ArrayList<Partie>();
 		
 		for (Partie partie : results) {
-			if(partie.is_processing() == true && partie.getDate_fin() == null) {
+			if(partie.is_processing() && partie.getDate_fin() == null) {
 				process_parties.add(partie);
 			}
 		}
@@ -93,7 +93,7 @@ public class Partie extends Modele {
 		List<Partie> not_started_parties = new ArrayList<Partie>();
 		
 		for (Partie partie : results) {
-			if(partie.is_processing() == false && partie.getDate_fin() == null) {
+			if(!partie.is_processing() && partie.getDate_fin() == null) {
 				not_started_parties.add(partie);
 			}
 		}
@@ -117,10 +117,13 @@ public class Partie extends Modele {
 		// si la date est inférieur ==> en cours sinon non
 		boolean en_cours = false;
 		Date today = new Date();
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
 		Date date_debut = format.parse(this.getDate_debut());
 		
-		if(date_debut.compareTo(today) < 0 || date_debut.compareTo(today) == 0)
+		if(today.compareTo(date_debut) == 0)
+			if(today.getHours() > date_debut.getHours())
+				en_cours = true;
+		if(today.compareTo(date_debut) == 1)
 			en_cours = true;
 		
 		return en_cours;
@@ -187,7 +190,7 @@ public class Partie extends Modele {
 				"(id_partie, nom_partie, duree, capital_depart, cout_salaire, cout_charge_exp, cout_loyer, date_debut)"+
 				"values('"+this.getId_partie()+"','"+this.getNom_partie()+"','"+this.getDuree()+
 				"','"+this.getCapital_depart()+"','"+this.getCout_salaire()+"','"+this.getCout_charge_exp()+
-				"','"+this.getCout_loyer()+"','"+this.getDate_debut()+"')");
+				"','"+this.getCout_loyer()+"',TO_DATE('"+this.getDate_debut()+"', 'dd/mm/yyyy hh24:mi') )");
 		
 		Tour tour = new Tour(Tour.lastId(), this.getId_partie(), "1", "", "1");
 		Tour.add_tour(tour);
@@ -201,6 +204,31 @@ public class Partie extends Modele {
 			has_participe = true;
 		}
 		return has_participe;
+	}
+	
+	public boolean has_admin() throws SQLException {
+		boolean admin = false;
+		ArrayList<Participation> participations = get_all_participations();
+		
+		for (Participation participation : participations) {
+			Utilisateur user = Utilisateur.find(participation.getId_utilisateur());
+			if(user.is_admin())
+				admin = true;
+		}
+		return admin;
+	}
+	
+	public boolean admin_can_play() throws SQLException {
+		boolean can = false;
+		ArrayList<Participation> participations = get_all_participations();
+		Tour last_tour = Tour.last_tour_of_partie(this);
+		
+		for (Participation participation : participations) {
+			Utilisateur user = Utilisateur.find(participation.getId_utilisateur());
+			// A FIXER
+		}
+		
+		return can;
 	}
 
 	public String getId_partie() {

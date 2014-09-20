@@ -75,5 +75,6 @@
 
 <form action="Produits" method="post" role="form" class="form-horizontal col-xs-12 form_products">
 	<input type="hidden" name="user_id" value="${user.getId()}" />
+	<input type="hidden" name="partie_id" value="${partie.getId_partie()}" />
 	<button type="submit" class="btn btn-success col-xs-12 sign_in_button">Validez!</button>
 </form>

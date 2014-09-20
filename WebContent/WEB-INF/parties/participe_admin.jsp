@@ -1,59 +1,49 @@
+<%@page import="Modeles.Entreprise"%>
 <%@page import="Modeles.Utilisateur"%>
 <%@ page import="Modeles.Partie"%>
 <%@ page import="java.util.ArrayList"%>
 
-<div class="row">
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>Numero de tour</th>
-				<th>Capital Restant</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-			   <td>1</td>
-			   <td>20 000 &euro;</td>
-			</tr>
-			<tr class="danger">
-			   <td>2</td>
-			   <td>18 000 &euro;</td>
-			</tr>
-			<tr class="success">
-			   <td>3</td>
-			   <td>25 000 &euro;</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-
+<!--  Indiquer le nombre du tour courant -->
 
 <div class="row">
 	<table class="table table-hover products">
 		<thead>
 			<tr>
+				<th>Joueur</th>
 				<th>Produit</th>
-				<th>Quantité en stock</th>
 				<th>Prix d'achat &euro;</th>
-				<th>Quantité d'achat</th>
+				<th>Quantité d'achat</th> <!-- peux pas la changer -->
 				<th>Prix de vente &euro;</th>
 				<th>Quantité de vente</th>
+				<th>Perte de stock</th>
 			</tr>
 		</thead>
 		<tbody>
 		<%
-		ArrayList<Produit> produits = (ArrayList<Produit>) entreprise.getProduits();
-		for(Produit produit : produits) {
+			// Boucle sur les utilisateurs ok
+			// Boucle sur leurs produits ok
+			// mettre les evenements
+			
+			// POST : 
+			// si prix achat != ===> evenemnent achat avec le nouveaux prix
+			// si prix/qte vente != ===> idem que achat + qte à changer
+			
+			// Le capital est calculé :
+			// Capital actuel
+			// - prix achat / qte (admin)
+			// + prix achat / qte (admin)
+			// - charges
+			
+			//for(Utilisateur user : partie_utilisateurs) {
+			
+			//Entreprise user_entreprise = user.getEntreprise();
+			//ArrayList<Produit> produits = (ArrayList<Produit>) user_entreprise.getProduits();
+			//for(Produit produit : produits) {
 		%>
-			<tr class="<%= produit.getNom_produit() %>">
-			   <td><%= produit.getNom_produit() %></td>
-			   <td><%= produit.getStock() %></td>
-			   <td><input type="number" value="0" name="<%= produit.getNom_produit() %>_prix_achat" class="prix_achat" /></td>
-			   <td><input type="number" value="0" name="<%= produit.getNom_produit() %>_qte_achat" class="qte_achat" /></td>
-			   <td><input type="number" value="0" name="<%= produit.getNom_produit() %>_prix_vente" class="prix_vente" /></td>
-			   <td><input type="number" value="0" name="<%= produit.getNom_produit() %>_qte_vente" class="qte_vente" /></td>
+			<tr>
+			   <td></td>
 			</tr>
-		<% } %>
+		<% //} %>
 		</tbody>
 	</table>
 </div>

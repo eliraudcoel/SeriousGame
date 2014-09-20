@@ -18,6 +18,7 @@
 	String lien = "Parties?action=show&nb=";
 	String new_lien = "";
 	ArrayList<Partie> in_processing_parties = (ArrayList<Partie>) request.getAttribute("in_processing_parties");
+	ArrayList<Partie> not_started_parties = (ArrayList<Partie>) request.getAttribute("not_started_parties");
 	
 	if(in_processing_parties.size() > 0) {
 %>
@@ -67,6 +68,8 @@
 <div class="row">
 	<h2 class="col-xs-12"> Rejoindre une partie :</h2>
 </div>
+
+<% if(not_started_parties.size() > 0) { %>
 <div class="row">
 	<table class="table table-hover">
 		<thead>
@@ -79,9 +82,7 @@
 		</thead>
 		<tbody>
 			<%
-				Utilisateur user = (Utilisateur) session.getAttribute("user");
-				ArrayList<Partie> not_started_parties = (ArrayList<Partie>) request.getAttribute("not_started_parties");
-				
+				Utilisateur user = (Utilisateur) session.getAttribute("user");				
 				for(Partie partie : not_started_parties) {
 			%>
 				<tr>
@@ -93,17 +94,41 @@
 						<input type="hidden" name="type_post" value="participer" />
 						<input type="hidden" name="user_id" value="<%= user.getId() %>" />
 						<input type="hidden" name="partie_id" value="<%= partie.getId_partie()%>" />
-						<% if(partie.is_participe(user) == true) {%>
-							<span class="col-xs-12">Vous y participez!</span>
-						<% } else { %>
-							<button type="submit" class="btn col-xs-12"> Jouer ! </button>
-						<% } %>
+						<% 
+							if(user.is_admin()) {
+								if(partie.has_admin()) {
+								%>
+									<span class="col-xs-12">Déjà administré!</span>
+								<%
+								} else {
+								%>
+									<button type="submit" class="btn col-xs-12"> Jouer ! </button>
+								<%
+								}
+							}
+							if (!user.is_admin()) {
+								if(partie.is_participe(user)) {
+								%>
+									<span class="col-xs-12">Vous y participez!</span>
+								<% } else {	%>
+								<button type="submit" class="btn col-xs-12"> Jouer ! </button>
+								<%
+								}
+							}
+					   %>
 				   	</form>
 				   </td>
 				</tr>
 			<%}%>
 		</tbody>
 	</table>
+	<%
+	} else {
+		%>
+		<p class="col-xs-12"> Aucune partie crée</p>
+		<%
+	}
+%>
 </div>
 
 <!-- Insertion Footer -->

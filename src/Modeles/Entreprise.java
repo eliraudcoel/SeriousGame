@@ -11,7 +11,6 @@ public class Entreprise extends Modele {
 	private String id_utilisateur;
 	private String nom_entreprise;
 	
-	//private Utilisateur utilisateur;
 	private List<Produit> produits;
 	
 	public Entreprise(String id_entreprise, String id_utilisateur,
@@ -20,8 +19,6 @@ public class Entreprise extends Modele {
 		this.id_entreprise = id_entreprise;
 		this.id_utilisateur = id_utilisateur;
 		this.nom_entreprise = nom_entreprise;
-		// Enlever a cause de "too many connections"
-		//this.utilisateur = Utilisateur.find(id_utilisateur);
 		this.produits = Produit.find_by_entreprise(id_entreprise);
 	}
 	

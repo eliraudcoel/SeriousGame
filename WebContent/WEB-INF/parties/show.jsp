@@ -41,15 +41,11 @@
 		</div>
 	<% } %>
 	
-	<% if(partie.is_participe(user) == true && user.is_admin() == false) { %>
+	<% if(!user.is_admin() && partie.is_participe(user)) { %>
 		<%@ include file="participe.jsp" %>
-	<%
-	   } 
-	   if(partie.is_participe(user) == true && user.is_admin() == true) {
-	%>
+	<% } if(user.is_admin() && partie.is_participe(user)) { %>
 		<%@ include file="participe_admin.jsp" %>
-	<% } 
-		if(partie.is_participe(user) == false) { %>
+	<% } if(!partie.is_participe(user)) { %>
 		<%@ include file="no_participe.jsp" %>
 	<% } %>
 

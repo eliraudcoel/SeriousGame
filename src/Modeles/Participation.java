@@ -17,6 +17,7 @@ public class Participation extends Modele {
 
 	public static void addParticipant(Utilisateur user, Partie partie) throws SQLException {
 		String query = "INSERT into jouer VALUES('"+user.getId()+"', '"+partie.getId_partie()+"')";
+		System.out.println("QUERY : " + query);
 		update(query);
 	}
 	

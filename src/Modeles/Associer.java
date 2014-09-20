@@ -49,6 +49,23 @@ public class Associer extends Modele {
 		return associer;
 	}
 	
+	public static String lastIdByEntreprise(String id_entreprise) throws SQLException {
+		String id = "";
+		int ident = 0;
+		ResultSet resultat = query( "SELECT max(id_tour) max_id FROM associer WHERE id_entreprise='"+ id_entreprise+"'");
+		
+		while( resultat.next() ) {
+			id = resultat.getString("max_id");
+		}
+		ident = Integer.parseInt(id);
+		ident++;
+		return ""+ident;
+	}
+	
+	public static void addAssocier(Associer associer) throws SQLException {
+		update("INSERT into associer VALUES('"+associer.getId_tour()+"', '"+associer.getId_entreprise()+"', '"+associer.getCapital_actuel()+"')");
+	}
+	
 	public String getId_tour() {
 		return id_tour;
 	}
