@@ -11,11 +11,11 @@ public class Contenir extends Modele {
 		super();
 		this.id_tour = id_tour;
 		this.id_evenement = id_evenement;
-		this.nb_evenements = "";
+		this.nb_evenements = "0";
 	}
 	
 	public static void addContenir(Contenir contenir) throws SQLException {
-		update("INSERT into contenir VALUES('"+contenir.getId_tour()+"', '"+contenir.getId_evenement()+"', '"+contenir.getNb_evenements()+"')");
+		update("INSERT into contenir VALUES('"+contenir.getId_tour()+"', '"+contenir.getId_evenement()+"', "+contenir.getNb_evenements()+")");
 	}
 	
 	public String getId_tour() {

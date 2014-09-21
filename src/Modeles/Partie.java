@@ -162,7 +162,8 @@ public class Partie extends Modele {
 		
 		for (Participation participation : participations) {
 			user = Utilisateur.find(participation.getId_utilisateur());
-			users.add(user);
+			if(!user.is_admin())
+				users.add(user);
 		}
 		return users;
 	}
@@ -222,13 +223,38 @@ public class Partie extends Modele {
 		boolean can = false;
 		ArrayList<Participation> participations = get_all_participations();
 		Tour last_tour = Tour.last_tour_of_partie(this);
+		int count = 0;
 		
 		for (Participation participation : participations) {
 			Utilisateur user = Utilisateur.find(participation.getId_utilisateur());
-			// A FIXER
+			Entreprise ent = user.getEntreprise();
+			Associer associer = Associer.find_by_entreprise(ent.getId_entreprise(), last_tour.getId_tour());
+			if(associer != null) {
+				count = count + 1;
+			}
+		}
+		
+		if(count == participations.size()) {
+			can = true;
 		}
 		
 		return can;
+	}
+	
+	public boolean user_can_play(Utilisateur user) throws SQLException {
+		boolean can = true;
+		Tour last_tour = Tour.last_tour_of_partie(this);
+		Entreprise ent = user.getEntreprise();
+		Associer associer = Associer.find_by_entreprise(ent.getId_entreprise(), last_tour.getId_tour());
+		if(associer != null) {
+			can = false;
+		}
+		
+		return can;
+	}
+	
+	public void update_by_params(String params_type, String params) throws SQLException {
+		update("UPDATE partie SET "+ params_type +" = '"+ params +"' WHERE id_partie = '"+ this.getId_partie() +"'");
 	}
 
 	public String getId_partie() {

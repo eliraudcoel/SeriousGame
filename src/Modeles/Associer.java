@@ -63,7 +63,12 @@ public class Associer extends Modele {
 	}
 	
 	public static void addAssocier(Associer associer) throws SQLException {
-		update("INSERT into associer VALUES('"+associer.getId_tour()+"', '"+associer.getId_entreprise()+"', '"+associer.getCapital_actuel()+"')");
+		update("INSERT into associer VALUES('"+associer.getId_tour()+"', '"+associer.getId_entreprise()+"', "+associer.getCapital_actuel()+")");
+	}
+	
+	public static void updateAssocier(Associer associer) throws SQLException {
+		update("UPDATE associer SET capital_actuel = "+associer.getCapital_actuel()+" " +
+				"WHERE id_entreprise = '"+ associer.getId_entreprise() +"' AND id_tour='"+ associer.getId_tour()+"'");
 	}
 	
 	public String getId_tour() {

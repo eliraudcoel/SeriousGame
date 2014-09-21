@@ -90,8 +90,7 @@ public class Tour extends Modele {
 	}
 	
 	public static void add_tour(Tour tour) throws SQLException {
-		update("insert into tour (id_tour, id_partie, num_tour, regle, tour_actuel)" +
-				"values('"+tour.getId_tour()+"','"+tour.getId_partie()+"','"+tour.getNum_tour()+
+		update("insert into tour (id_tour, id_partie, num_tour, regle, tour_actuel) values('"+tour.getId_tour()+"','"+tour.getId_partie()+"','"+tour.getNum_tour()+
 				"','"+tour.getRegle()+"','"+tour.getTour_actuel()+"')");
 	}
 	

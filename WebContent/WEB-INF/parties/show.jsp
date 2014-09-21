@@ -17,6 +17,7 @@
 		Entreprise entreprise = user.getEntreprise();
 		Tour tour = null;
 		ArrayList<Utilisateur> partie_utilisateurs = (ArrayList<Utilisateur>) partie.get_all_utilisateurs();
+		ArrayList<Tour> tours = (ArrayList<Tour>) Tour.find_by_partie(partie.getId_partie());
 		
 		if(partie.is_processing()){
 			tour = Tour.last_tour_of_partie(partie);

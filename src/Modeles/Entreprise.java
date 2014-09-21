@@ -123,9 +123,6 @@ public class Entreprise extends Modele {
 	public void setNom_entreprise(String nom_entreprise) {
 		this.nom_entreprise = nom_entreprise;
 	}
-//	public Utilisateur getUtilisateur() {
-//		return utilisateur;
-//	}
 	public List<Produit> getProduits() {
 		return produits;
 	}
