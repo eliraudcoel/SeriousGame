@@ -19,9 +19,7 @@
 		ArrayList<Utilisateur> partie_utilisateurs = (ArrayList<Utilisateur>) partie.get_all_utilisateurs();
 		ArrayList<Tour> tours = (ArrayList<Tour>) Tour.find_by_partie(partie.getId_partie());
 		
-		if(partie.is_processing()){
-			tour = Tour.last_tour_of_partie(partie);
-		}
+		tour = Tour.last_tour_of_partie(partie);
 	%>
 	<div class="row">
 		<h2 class="col-xs-12">Partie <%= partie.getNom_partie() %></h2>

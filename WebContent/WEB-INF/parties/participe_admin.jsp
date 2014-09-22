@@ -42,13 +42,13 @@
 						<td><%= user_partie.getLogin() %></td>
 						<td><%= partie_produit.getNom_produit() %></td>
 						<td>
-							<input type="text" name="<%= user_partie.getLogin() %>_<%= partie_produit.getNom_produit() %>_prix_achat" value ="0" />
+							<input type="text" name="<%= user_partie.getLogin() %>_<%= partie_produit.getNom_produit() %>_prix_achat" value ="0" class="admin-inputs" />
 						</td>
 						<td>
-							<input type="text" name="<%= user_partie.getLogin() %>_<%= partie_produit.getNom_produit() %>_prix_vente" value ="0" />
+							<input type="text" name="<%= user_partie.getLogin() %>_<%= partie_produit.getNom_produit() %>_prix_vente" value ="0" class="admin-inputs" />
 						</td>
 						<td>
-							<input type="text"	name="<%= user_partie.getLogin() %>_<%= partie_produit.getNom_produit() %>_perte" value ="0" />
+							<input type="text"	name="<%= user_partie.getLogin() %>_<%= partie_produit.getNom_produit() %>_perte" value ="0" class="admin-inputs" />
 						</td>
 					</tr>
 				<%			}

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Modeles.Entreprise;
+import Modeles.Produit;
 import Modeles.Utilisateur;
 
 /**

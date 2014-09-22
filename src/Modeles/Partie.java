@@ -155,6 +155,10 @@ public class Partie extends Modele {
 		return (ArrayList<Participation>) Participation.find_by_partie(this);
 	}
 	
+	public ArrayList<Participation> get_all_participations_only_users() throws SQLException {
+		return (ArrayList<Participation>) Participation.find_by_partie_only_users(this);
+	}
+	
 	public List<Utilisateur> get_all_utilisateurs() throws SQLException {
 		ArrayList<Participation> participations = get_all_participations();
 		List<Utilisateur> users = new ArrayList<Utilisateur>();
@@ -221,7 +225,7 @@ public class Partie extends Modele {
 	
 	public boolean admin_can_play() throws SQLException {
 		boolean can = false;
-		ArrayList<Participation> participations = get_all_participations();
+		ArrayList<Participation> participations = get_all_participations_only_users();
 		Tour last_tour = Tour.last_tour_of_partie(this);
 		int count = 0;
 		
@@ -229,9 +233,8 @@ public class Partie extends Modele {
 			Utilisateur user = Utilisateur.find(participation.getId_utilisateur());
 			Entreprise ent = user.getEntreprise();
 			Associer associer = Associer.find_by_entreprise(ent.getId_entreprise(), last_tour.getId_tour());
-			if(associer != null) {
+			if(associer != null)
 				count = count + 1;
-			}
 		}
 		
 		if(count == participations.size()) {

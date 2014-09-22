@@ -1,5 +1,7 @@
 <%@page import="Modeles.Associer"%>
 <%@ page import="Modeles.Utilisateur"%>
+<%@ page import="Modeles.Entreprise"%>
+<%@ page import="Modeles.Tour"%>
 <%@ page import="java.util.*"%>
 
 <div class="row">
@@ -7,23 +9,41 @@
 		<thead>
 			<tr>
 				<th>tour</th>
-				<% for(Utilisateur partie_user : partie_utilisateurs) {	%>
-					<th><%= partie_user.getLogin() %></th>
-				<% } %>
+					<% 
+					for(Utilisateur partie_user : partie_utilisateurs) {
+						if(!partie_user.is_admin()) {
+						%>
+							<th><%= partie_user.getLogin() %></th>
+						<% 
+						}
+					} 
+				%>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<% ArrayList<Tour> partie_tours = (ArrayList<Tour>) Tour.find_by_partie(partie.getId_partie()); %>
-				<% for(Tour partie_tour : partie_tours) { %>
-					<td><%= partie_tour.getNum_tour() %></td>
-				<% } %>
+			   <td>Départ</td>
+			   <td><%= partie.getCapital_depart() %> &euro;</td>
+			</tr>
+			<tr>
 				<% 
-					Associer assoc = null;
-					for(Utilisateur partie_user : partie_utilisateurs) {
+					for(Tour partie_tour : tours) {
+						if(!partie_tour.getNum_tour().equals(tour.getNum_tour())) {
+					%>
+					<td><%= partie_tour.getNum_tour() %></td>
+					<% 
+						for(Utilisateur partie_user : partie_utilisateurs) {
+							if(!partie_user.is_admin()) {
+									Entreprise user_ent = partie_user.getEntreprise();
+									Associer assoc = Associer.find_by_entreprise(user_ent.getId_entreprise(), partie_tour.getId_tour());
+								%>
+								<td><%= assoc.getCapital_actuel() %>&euro;</td>
+								<% 
+							}			
+						}
+						}
+					}
 				%>
-					<td><%= partie_user.getLogin() %></td>
-				<% } %>
 			</tr>
 		</tbody>
 	</table>

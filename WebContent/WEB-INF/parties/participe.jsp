@@ -18,21 +18,18 @@
 			   <td><%= partie.getCapital_depart() %> &euro;</td>
 			</tr>
 			<%
-				if(tours.size() != 1) {
-					Associer associer = null;
-					for(Tour un_tour : tours) {
-						if(!un_tour.equals(tour)) {
-							associer = Associer.find_by_entreprise(entreprise.getId_entreprise(), un_tour.getId_tour());
-					 		// A FIXERRRR
-					 		%>
-								<tr>
-								   <td><%= un_tour.getNum_tour() %></td>
-								   <td>&euro;</td>
-								</tr>
-							<%
-						}
-				 	} 
-				}
+				Associer associer = null;
+				for(Tour un_tour : tours) {
+					if(!un_tour.getNum_tour().equals(tour.getNum_tour())) {
+						associer = Associer.find_by_entreprise(entreprise.getId_entreprise(), un_tour.getId_tour());
+				 		%>
+							<tr>
+							   <td><%= un_tour.getNum_tour() %></td>
+							   <td><%= associer.getCapital_actuel() %>&euro;</td>
+							</tr>
+						<%
+					}
+			 	}
 			%>
 		</tbody>
 	</table>
