@@ -97,18 +97,23 @@ public class Utilisateurs extends HttpServlet {
 			if(login != "") {
 				user.update_by_params("login", login);
 			}
-			if(nom_entreprise != "") {
-				ent_ok = verifEntreprise(nom_entreprise);
-				if(ent_ok)
-					entreprise.update_by_params("nom_entreprise", nom_entreprise);
-				else
-					message_ent = "Le nom d'entreprise que vous avez rentrer est déjà utilisé";
+			if(!user.is_admin()) {
+				if(nom_entreprise != "") {
+					ent_ok = verifEntreprise(nom_entreprise);
+					if(ent_ok)
+						entreprise.update_by_params("nom_entreprise", nom_entreprise);
+					else
+						message_ent = "Le nom d'entreprise que vous avez rentrer est déjà utilisé";
+				}
+				if (message_ent != "")
+					request.setAttribute("message_ent", message_ent);
 			}
 			
 			if (message_mdp != "")
 				request.setAttribute("message_mdp", message_mdp);
-			if (message_ent != "")
-				request.setAttribute("message_ent", message_ent);
+			
+			if (message_mdp == "")
+				request.setAttribute("message_ok", "Modifications enregistrées!");
 			
 			updateUserInSession(request);
 		} catch (SQLException e) {

@@ -37,6 +37,27 @@ public class Inscription extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 	}
+	
+	public void generateProduits(Utilisateur user) throws SQLException {
+		int stock = 100;
+		int last_id = Integer.parseInt(Produit.lastId());
+		int last_id_2 = last_id + 1;
+		int last_id_3 = last_id_2 + 1;
+		int last_id_4 = last_id_3 + 1;
+		int last_id_5 = last_id_4 + 1;
+		
+		Produit produit_bois = new Produit(""+last_id, user.getId_entreprise(), "bois", "/images", ""+stock);
+		Produit produit_fer = new Produit(""+last_id_2, user.getId_entreprise(), "fer", "/images", ""+stock);
+		Produit produit_bronze = new Produit(""+last_id_3, user.getId_entreprise(), "bronze", "/images", ""+stock);
+		Produit produit_or = new Produit(""+last_id_4, user.getId_entreprise(), "or", "/images", ""+stock);
+		Produit produit_table = new Produit(""+last_id_5, user.getId_entreprise(), "table", "/images", ""+stock);
+		
+		Produit.addProduit(produit_bois);
+		Produit.addProduit(produit_fer);
+		Produit.addProduit(produit_bronze);
+		Produit.addProduit(produit_or);
+		Produit.addProduit(produit_table);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -68,6 +89,8 @@ public class Inscription extends HttpServlet {
 				user.setId_entreprise(id_entreprise);
 				user.setEntreprise();
 				Utilisateur.updateUser(user);
+				
+				generateProduits(user);
 				
 				request.setAttribute("user", user);
 				doGet(request, response);

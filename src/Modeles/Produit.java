@@ -60,6 +60,24 @@ public class Produit extends Modele {
 		
 		return produits;
 	}
+	
+	
+	public static String lastId() throws SQLException {
+		String id = "";
+		int ident = 0;
+		ResultSet resultat = query( "SELECT max(id_produit) max_id FROM produit");
+		
+		while( resultat.next() ) {
+			id = resultat.getString("max_id");
+		}
+		ident = Integer.parseInt(id);
+		ident++;
+		return ""+ident;
+	}
+	
+	public static void addProduit(Produit pd) throws SQLException {
+		update("INSERT into produit VALUES('"+pd.getId_produit()+"','"+pd.getId_entreprise()+"','"+pd.getNom_produit()+"','"+pd.getImage_produit()+"','"+pd.getStock()+"')");
+	}
 
 	public String getId_produit() {
 		return id_produit;
